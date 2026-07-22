@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Ejercicios · Multiplicación y División · 6° Básico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Fredoka+One&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --azul: #2c5f7a;
+      --azul2: #1d4357;
+      --naranja: #e0911a;
+      --naranja-light: #f5a623;
+      --verde: #48b28a;
+      --verde2: #328f6b;
+      --morado: #8e44ad;
+      --rojo: #c0392b;
+      --crema: #f6f2eb;
+      --gris: #6a7b8c;
+      --borde: #d7cdbc;
+      --blanco: #ffffff;
+      --amarillo-resalte: #fef3c7;
+      --deep-green: #0a2f1f;
+      --pine: #145c33;
+      --mint: #2a7f49;
+      --lime: #9bcd6c;
+    }
+
+    body {
+      font-family: 'Quicksand', 'Source Sans 3', sans-serif;
+      background: linear-gradient(135deg, var(--azul2) 0%, var(--azul) 50%, var(--pine) 100%);
+      min-height: 100vh;
+    }
+
+    /* ── TOP BAR ── */
+    #topbar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--azul2);
+      border-bottom: 3px solid var(--naranja);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    #topbar .logo {
+      font-size: 1.6rem;
+    }
+    #topbar h1 {
+      font-family: 'Fredoka One', cursive;
+      color: white;
+      font-size: 1.1rem;
+      flex: 1;
+    }
+    #topbar h1 span {
+      color: var(--naranja-light);
+    }
+    #score-pill {
+      background: rgba(155, 205, 108, 0.15);
+      border: 1px solid var(--lime);
+      color: var(--lime);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #prog-wrap {
+      background: rgba(0, 0, 0, 0.3);
+      height: 5px;
+    }
+    #prog-fill {
+      height: 100%;
+      background: var(--naranja);
+      transition: width 0.4s;
+      width: 0%;
+    }
+
+    /* ── MAIN ── */
+    #main {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 20px 16px 100px;
+    }
+
+    /* ── INTRO CARD ── */
+    #intro-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+      animation: fadeUp 0.5s ease forwards;
+    }
+    #intro-card .icon {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+    #intro-card h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: var(--azul2);
+      margin-bottom: 8px;
+    }
+    #intro-card h2 span {
+      color: var(--naranja);
+    }
+    #intro-card p {
+      color: var(--gris);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .tag-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tag {
+      background: var(--crema);
+      border: 1px solid var(--borde);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      color: var(--azul);
+      font-weight: 600;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      background: var(--crema);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 14px;
+    }
+    .info-item {
+      text-align: center;
+    }
+    .info-item .num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--azul);
+    }
+    .info-item .label {
+      font-size: 0.7rem;
+      color: var(--gris);
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: none;
+      cursor: pointer;
+      border-radius: 40px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 24px;
+      transition: all 0.2s;
+    }
+    .btn-gold {
+      background: var(--naranja);
+      color: var(--azul2);
+    }
+    .btn-gold:hover {
+      background: var(--naranja-light);
+      transform: scale(1.02);
+    }
+    .btn-green {
+      background: var(--verde);
+      color: white;
+    }
+    .btn-green:hover {
+      background: var(--verde2);
+      transform: scale(1.02);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--naranja);
+      color: var(--naranja);
+    }
+    .btn-outline:hover {
+      background: rgba(224, 145, 26, 0.1);
+    }
+    .btn-red {
+      background: var(--rojo);
+      color: white;
+    }
+    .btn-red:hover {
+      background: #a02020;
+      transform: scale(1.02);
+    }
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 0.75rem;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 20px 0 14px 0;
+    }
+    .section-divider span {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      color: white;
+      background: var(--azul2);
+      padding: 4px 16px;
+      border-radius: 30px;
+      border: 2px solid var(--naranja);
+      white-space: nowrap;
+    }
+    .section-divider .line {
+      flex: 1;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ── QUESTION CARDS ── */
+    #questions-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .q-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      border-left: 5px solid var(--borde);
+      transition: border-color 0.2s;
+      animation: fadeUp 0.4s ease both;
+    }
+    .q-card.answered-correct {
+      border-left-color: var(--verde);
+    }
+    .q-card.answered-wrong {
+      border-left-color: var(--rojo);
+    }
+    .q-card .q-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--gris);
+      margin-bottom: 4px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .q-card .q-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--azul2);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .q-card .q-text .math {
+      background: var(--crema);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    /* ── SELECTION MULTIPLE ── */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid var(--borde);
+      border-radius: 12px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: all 0.18s;
+      background: var(--crema);
+    }
+    .opt:hover:not(.locked) {
+      border-color: var(--verde);
+      background: #d4efdf;
+    }
+    .opt.selected {
+      border-color: var(--verde);
+      background: #c8e6d5;
+    }
+    .opt.correct {
+      border-color: var(--verde);
+      background: #d4efdf;
+    }
+    .opt.wrong {
+      border-color: var(--rojo);
+      background: #fdeaea;
+    }
+    .opt.locked {
+      cursor: default;
+    }
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--borde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gris);
+      flex-shrink: 0;
+      background: white;
+    }
+    .opt.selected .opt-letter {
+      border-color: var(--verde);
+      color: var(--verde);
+      background: #c8e6d5;
+    }
+    .opt.correct .opt-letter {
+      border-color: var(--verde);
+      color: var(--verde);
+      background: #c8e6d5;
+    }
+    .opt.wrong .opt-letter {
+      border-color: var(--rojo);
+      color: var(--rojo);
+      background: #fdeaea;
+    }
+    .opt-text {
+      font-size: 0.88rem;
+      color: #1e2b3c;
+      line-height: 1.4;
+    }
+
+    /* ── VERDADERO/FALSO ── */
+    .vf-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .vf-btn {
+      padding: 10px 28px;
+      border: 3px solid var(--borde);
+      border-radius: 14px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+      background: var(--crema);
+      font-family: 'Quicksand', sans-serif;
+      flex: 1;
+      max-width: 200px;
+    }
+    .vf-btn:hover:not(.locked) {
+      transform: scale(1.03);
+    }
+    .vf-btn.true:hover:not(.locked) {
+      border-color: var(--verde);
+      background: #d4efdf;
+    }
+    .vf-btn.false:hover:not(.locked) {
+      border-color: var(--rojo);
+      background: #fdeaea;
+    }
+    .vf-btn.selected-true {
+      border-color: var(--verde);
+      background: #d4efdf;
+      color: var(--verde2);
+    }
+    .vf-btn.selected-false {
+      border-color: var(--rojo);
+      background: #fdeaea;
+      color: var(--rojo);
+    }
+    .vf-btn.correct {
+      border-color: var(--verde);
+      background: #d4efdf;
+      color: var(--verde2);
+    }
+    .vf-btn.wrong {
+      border-color: var(--rojo);
+      background: #fdeaea;
+      color: var(--rojo);
+    }
+    .vf-btn.locked {
+      cursor: default;
+    }
+
+    /* ── COMPLETAR ESPACIOS ── */
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .input-group input {
+      padding: 8px 14px;
+      border: 2px solid var(--borde);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      width: 120px;
+      transition: border-color 0.2s;
+      background: var(--crema);
+    }
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--azul);
+    }
+    .input-group input.correct {
+      border-color: var(--verde);
+      background: #d4efdf;
+    }
+    .input-group input.wrong {
+      border-color: var(--rojo);
+      background: #fdeaea;
+    }
+    .input-group .respuesta-correcta {
+      font-size: 0.85rem;
+      color: var(--gris);
+    }
+
+    /* ── DRAG & DROP - ASOCIAR ── */
+    .drag-asociar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      background: var(--crema);
+      border-radius: 14px;
+      padding: 16px;
+      border: 2px solid var(--borde);
+      min-height: 200px;
+    }
+    .drag-asociar .columna {
+      flex: 1;
+      min-width: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+    .drag-asociar .columna .titulo-col {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .drag-asociar .drag-item-asociar {
+      padding: 10px 18px;
+      background: white;
+      border: 2px solid var(--azul);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+      color: var(--azul);
+      user-select: none;
+      width: 100%;
+      max-width: 180px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .drag-asociar .drag-item-asociar:hover:not(.placed):not(.locked) {
+      transform: scale(1.03);
+      border-color: var(--naranja);
+    }
+    .drag-asociar .drag-item-asociar.selected {
+      border-color: var(--naranja);
+      background: var(--amarillo-resalte);
+      box-shadow: 0 0 0 3px var(--naranja-light);
+    }
+    .drag-asociar .drag-item-asociar.placed {
+      opacity: 0.4;
+      cursor: default;
+      border-color: var(--gris);
+      background: #eee;
+    }
+    .drag-asociar .drag-item-asociar.locked {
+      cursor: default;
+    }
+    .drag-asociar .conexion-linea {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--gris);
+      padding: 0 8px;
+    }
+    .drag-asociar .drop-zone-asociar {
+      padding: 10px 14px;
+      background: white;
+      border: 2px dashed var(--gris);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      min-width: 80px;
+      min-height: 50px;
+      text-align: center;
+      color: var(--gris);
+      transition: all 0.18s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      width: 100%;
+      max-width: 180px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .drag-asociar .drop-zone-asociar .resultado-num {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .drag-asociar .drop-zone-asociar .resultado-match {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--azul);
+      min-height: 14px;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .drag-asociar .drop-zone-asociar.highlight {
+      border-color: var(--naranja);
+      background: var(--amarillo-resalte);
+    }
+    .drag-asociar .drop-zone-asociar.filled {
+      border-color: var(--azul);
+      color: var(--azul2);
+      background: white;
+      border-style: solid;
+    }
+    .drag-asociar .drop-zone-asociar.correct .resultado-match {
+      color: var(--verde2);
+    }
+    .drag-asociar .drop-zone-asociar.wrong .resultado-match {
+      color: var(--rojo);
+    }
+    .drag-asociar .drop-zone-asociar.correct {
+      border-color: var(--verde);
+      background: #d4efdf;
+      color: var(--verde2);
+    }
+    .drag-asociar .drop-zone-asociar.wrong {
+      border-color: var(--rojo);
+      background: #fdeaea;
+      color: var(--rojo);
+    }
+    .drag-asociar .drop-zone-asociar.locked {
+      cursor: default;
+    }
+    .drag-asociar .drag-item-asociar,
+    .drag-asociar .drop-zone-asociar {
+      touch-action: manipulation;
+    }
+
+    /* ── FEEDBACK ── */
+    .q-feedback {
+      display: none;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 10px;
+    }
+    .q-feedback.correct {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--verde2);
+      background: #d4efdf;
+    }
+    .q-feedback.wrong {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--rojo);
+      background: #fdeaea;
+    }
+    .q-feedback .fb-explicacion {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: var(--gris);
+    }
+
+    /* ── SUBMIT BAR ── */
+    #submit-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--azul2);
+      border-top: 3px solid var(--naranja);
+      padding: 8px 16px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    #answered-count {
+      color: #8aae7a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+    }
+
+    /* ── RESULTS ── */
+    #results-wrap {
+      display: none;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    #results-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .score-ring {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fredoka One', cursive;
+      border: 8px solid var(--naranja);
+      background: var(--crema);
+    }
+    .score-ring .score-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--azul2);
+      line-height: 1;
+    }
+    .score-ring .score-of {
+      font-size: 0.75rem;
+      color: var(--gris);
+    }
+    #result-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--azul2);
+      margin-bottom: 6px;
+    }
+    #result-msg {
+      color: var(--gris);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .result-stats {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .stat-box {
+      background: var(--crema);
+      border-radius: 14px;
+      padding: 8px 16px;
+      text-align: center;
+      border: 1px solid var(--borde);
+    }
+    .stat-box .sv {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .stat-box .sl {
+      font-size: 0.65rem;
+      color: var(--gris);
+      margin-top: 2px;
+    }
+    .stat-box.ok .sv {
+      color: var(--verde);
+    }
+    .stat-box.err .sv {
+      color: var(--rojo);
+    }
+    .stat-box.skip .sv {
+      color: var(--naranja);
+    }
+
+    .grade-box {
+      font-size: 1.1rem;
+      text-align: center;
+      padding: 10px;
+      border-radius: 40px;
+      margin-top: 14px;
+      font-weight: 700;
+    }
+    .approved {
+      background: #d4efdf;
+      color: var(--verde2);
+      border: 2px solid var(--verde);
+    }
+    .failed {
+      background: #fdeaea;
+      color: var(--rojo);
+      border: 2px solid var(--rojo);
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    #review-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .review-title {
+      font-family: 'Fredoka One', cursive;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .review-card {
+      background: white;
+      border-radius: 14px;
+      padding: 14px 18px;
+      border-left: 4px solid var(--borde);
+    }
+    .review-card.correct {
+      border-left-color: var(--verde);
+      background: #d4efdf;
+    }
+    .review-card.wrong {
+      border-left-color: var(--rojo);
+      background: #fdeaea;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      #main {
+        padding: 12px 10px 100px;
+      }
+      #intro-card,
+      #results-card {
+        padding: 20px 16px;
+      }
+      .q-card {
+        padding: 14px 14px;
+      }
+      .result-actions {
+        flex-direction: column;
+      }
+      .btn {
+        justify-content: center;
+        font-size: 0.8rem;
+        padding: 8px 18px;
+      }
+      .drag-asociar {
+        padding: 10px;
+        gap: 12px;
+      }
+      .drag-asociar .drag-item-asociar,
+      .drag-asociar .drop-zone-asociar {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        max-width: 140px;
+      }
+      .drag-asociar .conexion-linea {
+        font-size: 1.2rem;
+        padding: 0 4px;
+      }
+      .vf-btn {
+        padding: 8px 16px;
+        font-size: 1rem;
+        max-width: 150px;
+      }
+      .input-group input {
+        width: 80px;
+        font-size: 0.85rem;
+      }
+      .score-ring {
+        width: 100px;
+        height: 100px;
+      }
+      .score-ring .score-num {
+        font-size: 1.8rem;
+      }
+      .info-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .section-divider span {
+        font-size: 0.8rem;
+        padding: 3px 12px;
+      }
+      .drag-asociar .columna {
+        min-width: 120px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .vf-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      .vf-btn {
+        max-width: 100%;
+        width: 100%;
+      }
+      .options .opt {
+        padding: 6px 10px;
+        font-size: 0.82rem;
+      }
+      .drag-asociar .columna {
+        min-width: 100px;
+      }
+      .drag-asociar .drag-item-asociar,
+      .drag-asociar .drop-zone-asociar {
+        max-width: 120px;
+        font-size: 0.8rem;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="topbar">
+    <span class="logo">📐</span>
+    <h1>Ejercicios — <span>Multiplicación y División</span></h1>
+    <div id="score-pill">21 preguntas · Nota 1.0 a 7.0</div>
+  </div>
+  <div id="prog-wrap"><div id="prog-fill"></div></div>
+
+  <div id="main">
+
+    <!-- INTRO -->
+    <div id="intro-card">
+      <div class="icon">📝</div>
+      <h2>Ejercicios: <span>Multiplicación y División</span></h2>
+      <p>Practica con 21 preguntas aleatorias de cuatro tipos diferentes. Al finalizar verás tu puntaje, tu nota y una revisión completa.</p>
+      <div class="tag-row">
+        <span class="tag">✖️ Multiplicación</span>
+        <span class="tag">➗ División</span>
+        <span class="tag">🔢 Selección múltiple</span>
+        <span class="tag">✅ Verdadero/Falso</span>
+        <span class="tag">✏️ Completar</span>
+        <span class="tag">🖱️ Asociar</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-item"><div class="num">90</div><div class="label">Preguntas en banco</div></div>
+        <div class="info-item"><div class="num">21</div><div class="label">Preguntas por test</div></div>
+        <div class="info-item"><div class="num">60%</div><div class="label">Exigencia para nota 4.0</div></div>
+      </div>
+      <button class="btn btn-gold" onclick="startTest()">🚀 Iniciar Test</button>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div id="questions-wrap"></div>
+
+    <!-- RESULTS -->
+    <div id="results-wrap">
+      <div id="results-card">
+        <div class="score-ring">
+          <div class="score-num" id="r-score">0</div>
+          <div class="score-of" id="r-of">/ 21</div>
+        </div>
+        <div id="result-title"></div>
+        <div id="result-msg"></div>
+        <div class="result-stats">
+          <div class="stat-box ok"><div class="sv" id="r-correct">0</div><div class="sl">✅ Correctas</div></div>
+          <div class="stat-box err"><div class="sv" id="r-wrong">0</div><div class="sl">❌ Incorrectas</div></div>
+          <div class="stat-box skip"><div class="sv" id="r-skip">0</div><div class="sl">⚪ Sin responder</div></div>
+        </div>
+        <div class="grade-box" id="grade-box"></div>
+        <div class="result-actions">
+          <button class="btn btn-gold" onclick="restartTest()">🔄 Nuevo Test</button>
+          <button class="btn btn-green" onclick="window.location.href='index.html'">📘 Volver al curso</button>
+          <button class="btn btn-outline" onclick="window.location.href='C1.html'">📖 Volver a la clase</button>
+        </div>
+      </div>
+      <div class="review-title">📋 Revisión de Respuestas</div>
+      <div id="review-wrap"></div>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT BAR -->
+  <div id="submit-bar">
+    <div id="answered-count">Respondidas: 0 / 21</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-outline btn-sm" onclick="cancelTest()">← Cancelar</button>
+      <button class="btn btn-gold btn-sm" onclick="submitTest()">Finalizar Test ✓</button>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // POOLS DE PREGUNTAS
+    // ============================================================
+
+    // ─── SELECCIÓN MÚLTIPLE (40 preguntas) ───
+    const POOL_MULTIPLE = [
+      // Multiplicaciones (+2 cifras)
+      { q: '¿Cuál es el resultado de 23 × 14?', opts: ['312', '322', '332', '342'], ans: 1 },
+      { q: '¿Cuál es el resultado de 34 × 27?', opts: ['908', '918', '928', '938'], ans: 1 },
+      { q: '¿Cuál es el resultado de 45 × 32?', opts: ['1.420', '1.430', '1.440', '1.450'], ans: 2 },
+      { q: '¿Cuál es el resultado de 56 × 43?', opts: ['2.398', '2.408', '2.418', '2.428'], ans: 1 },
+      { q: '¿Cuál es el resultado de 67 × 54?', opts: ['3.608', '3.618', '3.628', '3.638'], ans: 1 },
+      { q: '¿Cuál es el resultado de 78 × 65?', opts: ['5.060', '5.070', '5.080', '5.090'], ans: 1 },
+      { q: '¿Cuál es el resultado de 89 × 76?', opts: ['6.754', '6.764', '6.774', '6.784'], ans: 1 },
+      { q: '¿Cuál es el resultado de 123 × 45?', opts: ['5.525', '5.535', '5.545', '5.555'], ans: 1 },
+      { q: '¿Cuál es el resultado de 234 × 56?', opts: ['13.084', '13.094', '13.104', '13.114'], ans: 2 },
+      { q: '¿Cuál es el resultado de 345 × 67?', opts: ['23.105', '23.115', '23.125', '23.135'], ans: 1 },
+      { q: '¿Cuál es el resultado de 456 × 78?', opts: ['35.558', '35.568', '35.578', '35.588'], ans: 1 },
+      { q: '¿Cuál es el resultado de 567 × 89?', opts: ['50.463', '50.473', '50.483', '50.493'], ans: 0 },
+      { q: '¿Cuál es el resultado de 125 × 36?', opts: ['4.400', '4.450', '4.500', '4.550'], ans: 2 },
+      { q: '¿Cuál es el resultado de 148 × 27?', opts: ['3.986', '3.996', '4.006', '4.016'], ans: 1 },
+      { q: '¿Cuál es el resultado de 324 × 15?', opts: ['4.840', '4.850', '4.860', '4.870'], ans: 2 },
+      { q: '¿Cuál es el resultado de 246 × 38?', opts: ['9.338', '9.348', '9.358', '9.368'], ans: 1 },
+      { q: '¿Cuál es el resultado de 387 × 29?', opts: ['11.213', '11.223', '11.233', '11.243'], ans: 1 },
+      { q: '¿Cuál es el resultado de 476 × 53?', opts: ['25.218', '25.228', '25.238', '25.248'], ans: 1 },
+      { q: '¿Cuál es el resultado de 589 × 47?', opts: ['27.673', '27.683', '27.693', '27.703'], ans: 2 },
+      { q: '¿Cuál es el resultado de 678 × 34?', opts: ['23.042', '23.052', '23.062', '23.072'], ans: 1 },
+      // Divisiones con cociente decimal
+      { q: '¿Cuál es el resultado de 15 ÷ 4?', opts: ['3,5', '3,6', '3,75', '3,8'], ans: 2 },
+      { q: '¿Cuál es el resultado de 22 ÷ 8?', opts: ['2,5', '2,6', '2,7', '2,75'], ans: 3 },
+      { q: '¿Cuál es el resultado de 17 ÷ 5?', opts: ['3,2', '3,4', '3,6', '3,8'], ans: 1 },
+      { q: '¿Cuál es el resultado de 31 ÷ 4?', opts: ['7,25', '7,5', '7,75', '8'], ans: 2 },
+      { q: '¿Cuál es el resultado de 29 ÷ 8?', opts: ['3,5', '3,6', '3,625', '3,7'], ans: 2 },
+      { q: '¿Cuál es el resultado de 47 ÷ 5?', opts: ['9,2', '9,4', '9,6', '9,8'], ans: 1 },
+      { q: '¿Cuál es el resultado de 53 ÷ 4?', opts: ['13,1', '13,2', '13,25', '13,3'], ans: 2 },
+      { q: '¿Cuál es el resultado de 19 ÷ 8?', opts: ['2,25', '2,3', '2,375', '2,4'], ans: 2 },
+      { q: '¿Cuál es el resultado de 41 ÷ 8?', opts: ['5,1', '5,1', '5,125', '5,2'], ans: 2 },
+      { q: '¿Cuál es el resultado de 37 ÷ 6?', opts: ['6,1', '6,15', '6,16', '6,166...'], ans: 3 },
+      { q: '¿Cuál es el resultado de 27 ÷ 6?', opts: ['4,4', '4,5', '4,6', '4,7'], ans: 1 },
+      { q: '¿Cuál es el resultado de 43 ÷ 8?', opts: ['5,3', '5,375', '5,4', '5,5'], ans: 1 },
+      { q: '¿Cuál es el resultado de 59 ÷ 8?', opts: ['7,2', '7,3', '7,375', '7,4'], ans: 2 },
+      { q: '¿Cuál es el resultado de 71 ÷ 8?', opts: ['8,8', '8,875', '8,9', '9'], ans: 1 },
+      { q: '¿Cuál es el resultado de 33 ÷ 6?', opts: ['5,4', '5,5', '5,6', '5,7'], ans: 1 },
+      { q: '¿Cuál es el resultado de 49 ÷ 6?', opts: ['8,1', '8,15', '8,16', '8,166...'], ans: 3 },
+      { q: '¿Cuál es el resultado de 61 ÷ 8?', opts: ['7,6', '7,625', '7,7', '7,8'], ans: 1 },
+      { q: '¿Cuál es el resultado de 73 ÷ 8?', opts: ['9,1', '9,125', '9,2', '9,3'], ans: 1 },
+      { q: '¿Cuál es el resultado de 83 ÷ 8?', opts: ['10,3', '10,375', '10,4', '10,5'], ans: 1 },
+      { q: '¿Cuál es el resultado de 97 ÷ 8?', opts: ['12,1', '12,125', '12,2', '12,3'], ans: 1 }
+    ];
+
+    // ─── VERDADERO/FALSO (20 preguntas) ───
+    const POOL_VF = [
+      { q: 'En 156 ÷ 4 = 39, el resto es 0.', ans: true, exp: 'Correcto. 4 × 39 = 156, por lo que el resto es 0.' },
+      { q: 'En 725 ÷ 5 = 145, el resto es 5.', ans: false, exp: 'Incorrecto. 5 × 145 = 725, por lo que el resto es 0.' },
+      { q: 'En 648 ÷ 6 = 108, el cociente es 108.', ans: true, exp: 'Correcto. 6 × 108 = 648.' },
+      { q: 'En 84 ÷ 7 = 12, el resto es 2.', ans: false, exp: 'Incorrecto. 7 × 12 = 84, por lo que el resto es 0.' },
+      { q: 'En 96 ÷ 8 = 12, el cociente es 11.', ans: false, exp: 'Incorrecto. 8 × 12 = 96, por lo que el cociente es 12.' },
+      { q: 'En 144 ÷ 12 = 12, el resto es 0.', ans: true, exp: 'Correcto. 12 × 12 = 144, por lo que el resto es 0.' },
+      { q: 'En 168 ÷ 14 = 12, el divisor es 12.', ans: false, exp: 'Incorrecto. El divisor es 14, el cociente es 12.' },
+      { q: 'En 225 ÷ 15 = 15, el resto es 0.', ans: true, exp: 'Correcto. 15 × 15 = 225, por lo que el resto es 0.' },
+      { q: 'En 320 ÷ 16 = 20, el cociente es 16.', ans: false, exp: 'Incorrecto. 16 × 20 = 320, el cociente es 20.' },
+      { q: 'En 420 ÷ 20 = 21, el resto es 0.', ans: true, exp: 'Correcto. 20 × 21 = 420, por lo que el resto es 0.' },
+      { q: '15 ÷ 4 = 3,75.', ans: true, exp: 'Correcto. 4 × 3,75 = 15.' },
+      { q: '22 ÷ 8 = 2,8.', ans: false, exp: 'Incorrecto. 22 ÷ 8 = 2,75.' },
+      { q: '17 ÷ 5 = 3,4.', ans: true, exp: 'Correcto. 5 × 3,4 = 17.' },
+      { q: '31 ÷ 4 = 7,75.', ans: true, exp: 'Correcto. 4 × 7,75 = 31.' },
+      { q: '29 ÷ 8 = 3,6.', ans: false, exp: 'Incorrecto. 29 ÷ 8 = 3,625.' },
+      { q: '47 ÷ 5 = 9,4.', ans: true, exp: 'Correcto. 5 × 9,4 = 47.' },
+      { q: '53 ÷ 4 = 13,25.', ans: true, exp: 'Correcto. 4 × 13,25 = 53.' },
+      { q: '19 ÷ 8 = 2,4.', ans: false, exp: 'Incorrecto. 19 ÷ 8 = 2,375.' },
+      { q: '41 ÷ 8 = 5,125.', ans: true, exp: 'Correcto. 8 × 5,125 = 41.' },
+      { q: '37 ÷ 6 = 6,2.', ans: false, exp: 'Incorrecto. 37 ÷ 6 = 6,166...' }
+    ];
+
+    // ─── COMPLETAR ESPACIOS (20 preguntas) ───
+    const POOL_COMPLETAR = [
+      { q: '23 × 14 = ', ans: '322' },
+      { q: '34 × 27 = ', ans: '918' },
+      { q: '45 × 32 = ', ans: '1440' },
+      { q: '56 × 43 = ', ans: '2408' },
+      { q: '67 × 54 = ', ans: '3618' },
+      { q: '78 × 65 = ', ans: '5070' },
+      { q: '89 × 76 = ', ans: '6764' },
+      { q: '123 × 45 = ', ans: '5535' },
+      { q: '234 × 56 = ', ans: '13104' },
+      { q: '345 × 67 = ', ans: '23115' },
+      { q: '456 × 78 = ', ans: '35568' },
+      { q: '567 × 89 = ', ans: '50463' },
+      { q: '125 × 36 = ', ans: '4500' },
+      { q: '148 × 27 = ', ans: '3996' },
+      { q: '324 × 15 = ', ans: '4860' },
+      { q: '246 × 38 = ', ans: '9348' },
+      { q: '387 × 29 = ', ans: '11223' },
+      { q: '476 × 53 = ', ans: '25228' },
+      { q: '589 × 47 = ', ans: '27683' },
+      { q: '678 × 34 = ', ans: '23052' }
+    ];
+
+    // ─── DRAG & DROP - ASOCIAR (10 preguntas) ───
+    const POOL_DRAG = [
+      {
+        operaciones: ['23 × 14', '34 × 27', '45 × 32', '56 × 43'],
+        resultados: ['322', '918', '1440', '2408'],
+        correcta: ['322', '918', '1440', '2408']
+      },
+      {
+        operaciones: ['67 × 54', '78 × 65', '89 × 76', '123 × 45'],
+        resultados: ['3618', '5070', '6764', '5535'],
+        correcta: ['3618', '5070', '6764', '5535']
+      },
+      {
+        operaciones: ['234 × 56', '345 × 67', '456 × 78', '567 × 89'],
+        resultados: ['13104', '23115', '35568', '50463'],
+        correcta: ['13104', '23115', '35568', '50463']
+      },
+      {
+        operaciones: ['125 × 36', '148 × 27', '324 × 15', '246 × 38'],
+        resultados: ['4500', '3996', '4860', '9348'],
+        correcta: ['4500', '3996', '4860', '9348']
+      },
+      {
+        operaciones: ['156 ÷ 4', '725 ÷ 5', '648 ÷ 6', '84 ÷ 7'],
+        resultados: ['39', '145', '108', '12'],
+        correcta: ['39', '145', '108', '12']
+      },
+      {
+        operaciones: ['96 ÷ 8', '144 ÷ 12', '168 ÷ 14', '225 ÷ 15'],
+        resultados: ['12', '12', '12', '15'],
+        correcta: ['12', '12', '12', '15']
+      },
+      {
+        operaciones: ['320 ÷ 16', '420 ÷ 20', '540 ÷ 18', '720 ÷ 24'],
+        resultados: ['20', '21', '30', '30'],
+        correcta: ['20', '21', '30', '30']
+      },
+      {
+        operaciones: ['15 ÷ 4', '22 ÷ 8', '17 ÷ 5', '31 ÷ 4'],
+        resultados: ['3,75', '2,75', '3,4', '7,75'],
+        correcta: ['3,75', '2,75', '3,4', '7,75']
+      },
+      {
+        operaciones: ['29 ÷ 8', '47 ÷ 5', '53 ÷ 4', '19 ÷ 8'],
+        resultados: ['3,625', '9,4', '13,25', '2,375'],
+        correcta: ['3,625', '9,4', '13,25', '2,375']
+      },
+      {
+        operaciones: ['41 ÷ 8', '37 ÷ 6', '27 ÷ 6', '43 ÷ 8'],
+        resultados: ['5,125', '6,166...', '4,5', '5,375'],
+        correcta: ['5,125', '6,166...', '4,5', '5,375']
+      }
+    ];
+
+    // ============================================================
+    // CONFIGURACIÓN DEL TEST
+    // ============================================================
+    const MULTIPLE_COUNT = 10;
+    const VF_COUNT = 5;
+    const COMPLETAR_COUNT = 5;
+    const DRAG_COUNT = 1;
+    const TOTAL_QUESTIONS = MULTIPLE_COUNT + VF_COUNT + COMPLETAR_COUNT + DRAG_COUNT;
+
+    let selectedQuestions = [];
+    let shuffledOptions = [];
+    let userAnswers = [];
+    let submitted = false;
+
+    // ============================================================
+    // UTILIDADES
+    // ============================================================
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function pickRandom(arr, n) {
+      const shuffled = shuffleArray(arr);
+      return shuffled.slice(0, n);
+    }
+
+    function shuffleOptionsForQuestion(q) {
+      const indices = [0, 1, 2, 3];
+      const shuffledIndices = shuffleArray(indices);
+      const newOpts = shuffledIndices.map(i => q.opts[i]);
+      const newAns = shuffledIndices.indexOf(q.ans);
+      return { opts: newOpts, ansIdx: newAns };
+    }
+
+    function buildTest() {
+      const multipleQ = pickRandom(POOL_MULTIPLE, MULTIPLE_COUNT);
+      const vfQ = pickRandom(POOL_VF, VF_COUNT);
+      const completarQ = pickRandom(POOL_COMPLETAR, COMPLETAR_COUNT);
+      const dragQ = pickRandom(POOL_DRAG, DRAG_COUNT);
+
+      selectedQuestions = [
+        ...multipleQ.map(q => ({ ...q, type: 'multiple' })),
+        ...vfQ.map(q => ({ ...q, type: 'vf' })),
+        ...completarQ.map(q => ({ ...q, type: 'completar' })),
+        ...dragQ.map(q => ({ ...q, type: 'drag' }))
+      ];
+
+      shuffledOptions = selectedQuestions.map(q => {
+        if (q.type === 'multiple') {
+          return shuffleOptionsForQuestion(q);
+        }
+        return null;
+      });
+
+      userAnswers = Array(TOTAL_QUESTIONS).fill(null);
+    }
+
+    // ============================================================
+    // RENDERIZADO
+    // ============================================================
+    function renderQuestions() {
+      const wrap = document.getElementById('questions-wrap');
+      wrap.innerHTML = '';
+
+      let globalIdx = 0;
+      const sections = [
+        { type: 'multiple', label: '🔢 Selección Múltiple', questions: selectedQuestions.filter(q => q.type === 'multiple') },
+        { type: 'vf', label: '✅ Verdadero / Falso', questions: selectedQuestions.filter(q => q.type === 'vf') },
+        { type: 'completar', label: '✏️ Completar Espacio', questions: selectedQuestions.filter(q => q.type === 'completar') },
+        { type: 'drag', label: '🖱️ Asociar Operación con Resultado', questions: selectedQuestions.filter(q => q.type === 'drag') }
+      ];
+
+      sections.forEach(section => {
+        if (section.questions.length === 0) return;
+
+        const divider = document.createElement('div');
+        divider.className = 'section-divider';
+        divider.innerHTML = `<span>${section.label}</span><div class="line"></div>`;
+        wrap.appendChild(divider);
+
+        section.questions.forEach(q => {
+          const idx = globalIdx;
+          const card = document.createElement('div');
+          card.className = 'q-card';
+          card.id = `qcard-${idx}`;
+          card.style.animationDelay = `${idx * 0.015}s`;
+
+          let contentHtml = '';
+
+          switch (q.type) {
+            case 'multiple':
+              contentHtml = renderMultiple(idx, q);
+              break;
+            case 'vf':
+              contentHtml = renderVF(idx, q);
+              break;
+            case 'completar':
+              contentHtml = renderCompletar(idx, q);
+              break;
+            case 'drag':
+              contentHtml = renderDrag(idx, q);
+              break;
+          }
+
+          card.innerHTML = `
+            <div class="q-num">Pregunta ${idx + 1} de ${TOTAL_QUESTIONS}</div>
+            <div class="q-text">${q.q}</div>
+            ${contentHtml}
+            <div class="q-feedback" id="qfb-${idx}"></div>
+          `;
+          wrap.appendChild(card);
+          globalIdx++;
+        });
+      });
+    }
+
+    function renderMultiple(idx, q) {
+      const optData = shuffledOptions[idx];
+      const letters = ['a', 'b', 'c', 'd'];
+      let optsHtml = '';
+      optData.opts.forEach((opt, optIdx) => {
+        optsHtml += `
+          <div class="opt" id="opt-${idx}-${optIdx}" onclick="selectMultiple(${idx}, ${optIdx})">
+            <div class="opt-letter">${letters[optIdx]}</div>
+            <div class="opt-text">${opt}</div>
+          </div>
+        `;
+      });
+      return `<div class="options">${optsHtml}</div>`;
+    }
+
+    function renderVF(idx, q) {
+      return `
+        <div class="vf-buttons">
+          <button class="vf-btn true" id="vf-${idx}-true" onclick="selectVF(${idx}, true)">✅ Verdadero</button>
+          <button class="vf-btn false" id="vf-${idx}-false" onclick="selectVF(${idx}, false)">❌ Falso</button>
+        </div>
+      `;
+    }
+
+    function renderCompletar(idx, q) {
+      return `
+        <div class="input-group">
+          <span style="font-size:1rem;font-weight:700;">=</span>
+          <input type="text" id="comp-${idx}" placeholder="?" onchange="checkCompletar(${idx})">
+          <span class="respuesta-correcta" id="comp-fb-${idx}"></span>
+        </div>
+      `;
+    }
+
+    function renderDrag(idx, q) {
+      // Cada operación/resultado se empareja con su índice original ANTES de
+      // barajar, para poder barajar ambas columnas de forma independiente
+      // (visualmente) sin perder la referencia de cuál va con cuál.
+      const opsConIndice = q.operaciones.map((op, i) => ({ text: op, orig: i }));
+      const resConIndice = q.resultados.map((res, i) => ({ text: res, orig: i }));
+
+      const operaciones = shuffleArray(opsConIndice);
+      const resultados = shuffleArray(resConIndice);
+
+      // Guardamos el orden barajado en la propia pregunta (misma referencia
+      // que está en selectedQuestions) para poder corregir y mostrar el
+      // repaso más adelante sin depender del DOM.
+      q._opOrder = operaciones.map(o => o.orig);
+      q._resOrder = resultados.map(r => r.orig);
+
+      let operacionesHtml = '';
+      operaciones.forEach((op, i) => {
+        operacionesHtml += `
+          <div class="drag-item-asociar" id="drag-op-${idx}-${i}" data-orig="${op.orig}" onclick="selectDragAsociar(${idx}, ${i}, 'op')">
+            ${op.text}
+          </div>
+        `;
+      });
+
+      let resultadosHtml = '';
+      resultados.forEach((res, i) => {
+        resultadosHtml += `
+          <div class="drop-zone-asociar" id="drop-res-${idx}-${i}" data-orig="${res.orig}" onclick="placeDragAsociar(${idx}, ${i})">
+            <span class="resultado-num">${res.text}</span>
+            <span class="resultado-match"></span>
+          </div>
+        `;
+      });
+
+      return `
+        <div class="drag-asociar">
+          <div class="columna">
+            <div class="titulo-col">📝 Operaciones</div>
+            ${operacionesHtml}
+          </div>
+          <div class="conexion-linea">⟷</div>
+          <div class="columna">
+            <div class="titulo-col">🎯 Resultados</div>
+            ${resultadosHtml}
+          </div>
+        </div>
+        <div style="font-size:0.8rem;color:var(--gris);margin-top:8px;text-align:center;">
+          💡 Toca una operación y luego el resultado que le corresponde. Si te equivocas, toca el resultado lleno para deshacerlo.
+        </div>
+      `;
+    }
+
+    // ============================================================
+    // INTERACCIONES
+    // ============================================================
+
+    // ─── Selección Múltiple ───
+    function selectMultiple(qIdx, optIdx) {
+      if (submitted) return;
+      if (userAnswers[qIdx] !== null) {
+        const prevOpt = document.getElementById(`opt-${qIdx}-${userAnswers[qIdx]}`);
+        if (prevOpt) prevOpt.classList.remove('selected');
+      }
+      userAnswers[qIdx] = optIdx;
+      const selectedOpt = document.getElementById(`opt-${qIdx}-${optIdx}`);
+      if (selectedOpt) selectedOpt.classList.add('selected');
+      updateProgress();
+    }
+
+    // ─── Verdadero/Falso ───
+    function selectVF(qIdx, value) {
+      if (submitted) return;
+      userAnswers[qIdx] = value;
+      const btnTrue = document.getElementById(`vf-${qIdx}-true`);
+      const btnFalse = document.getElementById(`vf-${qIdx}-false`);
+      if (btnTrue) btnTrue.className = 'vf-btn true';
+      if (btnFalse) btnFalse.className = 'vf-btn false';
+      if (value === true) {
+        if (btnTrue) btnTrue.classList.add('selected-true');
+      } else {
+        if (btnFalse) btnFalse.classList.add('selected-false');
+      }
+      updateProgress();
+    }
+
+    // ─── Completar Espacios ───
+    function checkCompletar(idx) {
+      if (submitted) return;
+      const input = document.getElementById(`comp-${idx}`);
+      const fb = document.getElementById(`comp-fb-${idx}`);
+      const q = selectedQuestions[idx];
+      const userVal = input.value.trim();
+      const correctVal = q.ans;
+
+      if (!userVal) {
+        fb.textContent = '';
+        return;
+      }
+
+      const userClean = userVal.replace(/\./g, '').replace(/\s/g, '');
+      const correctClean = correctVal.replace(/\./g, '').replace(/\s/g, '');
+
+      if (userClean === correctClean) {
+        input.className = '';
+        fb.textContent = '';
+        userAnswers[idx] = correctVal;
+      } else {
+        input.className = '';
+        fb.textContent = '';
+        userAnswers[idx] = null;
+      }
+      updateProgress();
+    }
+
+    // ─── Drag & Drop - Asociar ───
+    let selectedDragAsociar = { idx: null, type: null, itemIdx: null };
+
+    function selectDragAsociar(qIdx, itemIdx, type) {
+      if (submitted) return;
+      const item = document.getElementById(`drag-${type}-${qIdx}-${itemIdx}`);
+      if (!item || item.classList.contains('placed') || item.classList.contains('locked')) return;
+
+      // Tocar dos veces la misma operación la deselecciona.
+      if (selectedDragAsociar.idx === qIdx && selectedDragAsociar.type === type && selectedDragAsociar.itemIdx === itemIdx) {
+        item.classList.remove('selected');
+        selectedDragAsociar = { idx: null, type: null, itemIdx: null };
+        return;
+      }
+
+      if (selectedDragAsociar.idx === qIdx && selectedDragAsociar.itemIdx !== null) {
+        const prevItem = document.getElementById(`drag-${selectedDragAsociar.type}-${qIdx}-${selectedDragAsociar.itemIdx}`);
+        if (prevItem) prevItem.classList.remove('selected');
+      }
+
+      selectedDragAsociar = { idx: qIdx, type: type, itemIdx: itemIdx };
+      item.classList.add('selected');
+    }
+
+    function placeDragAsociar(qIdx, dropIdx) {
+      if (submitted) return;
+
+      const dropZone = document.getElementById(`drop-res-${qIdx}-${dropIdx}`);
+      if (!dropZone || dropZone.classList.contains('locked')) return;
+
+      // Si la zona ya tiene una operación, tocarla de nuevo la libera
+      // (deshace la asociación) en vez de bloquear al alumno.
+      if (dropZone.classList.contains('filled')) {
+        const opPos = dropZone.dataset.opPos;
+        const placedItem = document.getElementById(`drag-op-${qIdx}-${opPos}`);
+        if (placedItem) placedItem.classList.remove('placed');
+
+        dropZone.classList.remove('filled');
+        delete dropZone.dataset.opPos;
+        const matchLabel = dropZone.querySelector('.resultado-match');
+        if (matchLabel) matchLabel.textContent = '';
+
+        if (userAnswers[qIdx]) userAnswers[qIdx][dropIdx] = undefined;
+        updateProgress();
+        return;
+      }
+
+      if (selectedDragAsociar.idx !== qIdx || selectedDragAsociar.type !== 'op') return;
+
+      const item = document.getElementById(`drag-op-${qIdx}-${selectedDragAsociar.itemIdx}`);
+      if (!item || item.classList.contains('placed')) return;
+
+      const opOrig = Number(item.dataset.orig);
+
+      const matchLabel = dropZone.querySelector('.resultado-match');
+      if (matchLabel) matchLabel.textContent = `${item.textContent.trim()} ✓`;
+      dropZone.classList.add('filled');
+      dropZone.dataset.opPos = selectedDragAsociar.itemIdx;
+
+      item.classList.remove('selected');
+      item.classList.add('placed');
+
+      if (!userAnswers[qIdx]) userAnswers[qIdx] = [];
+      userAnswers[qIdx][dropIdx] = opOrig;
+
+      selectedDragAsociar = { idx: null, type: null, itemIdx: null };
+      updateProgress();
+    }
+
+    // ============================================================
+    // PROGRESO Y FINALIZACIÓN
+    // ============================================================
+    function updateProgress() {
+      let answered = 0;
+
+      selectedQuestions.forEach((q, idx) => {
+        const ans = userAnswers[idx];
+        if (ans !== null) {
+          if (q.type === 'drag') {
+            if (Array.isArray(ans) && ans.length === q.correcta.length && ans.every(v => v !== undefined)) {
+              answered++;
+            }
+          } else {
+            answered++;
+          }
+        }
+      });
+
+      document.getElementById('answered-count').textContent = `Respondidas: ${answered} / ${TOTAL_QUESTIONS}`;
+      document.getElementById('prog-fill').style.width = `${(answered / TOTAL_QUESTIONS) * 100}%`;
+    }
+
+    function calculateGrade(correct, total) {
+      const percentage = (correct / total) * 100;
+      const passing = 60;
+      let grade;
+      if (percentage >= passing) {
+        grade = 4.0 + ((percentage - passing) / (100 - passing)) * 3.0;
+      } else {
+        grade = 1.0 + (percentage / passing) * 3.0;
+      }
+      return { grade: Math.round(grade * 100) / 100, percentage: Math.round(percentage) };
+    }
+
+    // ============================================================
+    // SUBMIT TEST COMPLETO
+    // ============================================================
+    function submitTest() {
+      if (submitted) return;
+
+      let answered = 0;
+      selectedQuestions.forEach((q, idx) => {
+        const ans = userAnswers[idx];
+        if (ans !== null) {
+          if (q.type === 'drag') {
+            if (Array.isArray(ans) && ans.length === q.correcta.length && ans.every(v => v !== undefined)) {
+              answered++;
+            }
+          } else {
+            answered++;
+          }
+        }
+      });
+
+      if (answered < TOTAL_QUESTIONS) {
+        if (!confirm(`Tienes ${TOTAL_QUESTIONS - answered} pregunta(s) sin responder. ¿Deseas finalizar igual?`)) {
+          return;
+        }
+      }
+
+      submitted = true;
+      let correctCount = 0;
+      const letters = ['a', 'b', 'c', 'd'];
+
+      selectedQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`qcard-${idx}`);
+        const fb = document.getElementById(`qfb-${idx}`);
+        const chosen = userAnswers[idx];
+        let isCorrect = false;
+
+        switch (q.type) {
+          case 'multiple': {
+            const correctAns = shuffledOptions[idx].ansIdx;
+            for (let i = 0; i < 4; i++) {
+              const opt = document.getElementById(`opt-${idx}-${i}`);
+              if (opt) opt.classList.add('locked');
+            }
+            if (chosen === null) {
+              const correctOpt = document.getElementById(`opt-${idx}-${correctAns}`);
+              if (correctOpt) correctOpt.classList.add('correct');
+              card.classList.add('answered-wrong');
+              fb.className = 'q-feedback wrong';
+              fb.innerHTML = `⚪ Sin responder — La respuesta correcta era: <strong>${letters[correctAns]}) ${shuffledOptions[idx].opts[correctAns]}</strong>`;
+            } else if (chosen === correctAns) {
+              isCorrect = true;
+              correctCount++;
+              const chosenOpt = document.getElementById(`opt-${idx}-${chosen}`);
+              if (chosenOpt) {
+                chosenOpt.classList.remove('selected');
+                chosenOpt.classList.add('correct');
+              }
+              card.classList.add('answered-correct');
+              fb.className = 'q-feedback correct';
+              fb.innerHTML = '✅ ¡Correcto!';
+            } else {
+              const chosenOpt = document.getElementById(`opt-${idx}-${chosen}`);
+              const correctOpt = document.getElementById(`opt-${idx}-${correctAns}`);
+              if (chosenOpt) {
+                chosenOpt.classList.remove('selected');
+                chosenOpt.classList.add('wrong');
+              }
+              if (correctOpt) correctOpt.classList.add('correct');
+              card.classList.add('answered-wrong');
+              fb.className = 'q-feedback wrong';
+              fb.innerHTML = `❌ Incorrecto — La respuesta correcta era: <strong>${letters[correctAns]}) ${shuffledOptions[idx].opts[correctAns]}</strong>`;
+            }
+            break;
+          }
+
+          case 'vf': {
+            const correctAns = q.ans;
+            const btnTrue = document.getElementById(`vf-${idx}-true`);
+            const btnFalse = document.getElementById(`vf-${idx}-false`);
+            if (btnTrue) btnTrue.classList.add('locked');
+            if (btnFalse) btnFalse.classList.add('locked');
+
+            if (chosen === null) {
+              if (correctAns) {
+                if (btnTrue) btnTrue.classList.add('correct');
+              } else {
+                if (btnFalse) btnFalse.classList.add('correct');
+              }
+              card.classList.add('answered-wrong');
+              fb.className = 'q-feedback wrong';
+              fb.innerHTML = `⚪ Sin responder — La respuesta correcta era: <strong>${correctAns ? 'Verdadero' : 'Falso'}</strong>`;
+            } else if (chosen === correctAns) {
+              isCorrect = true;
+              correctCount++;
+              if (chosen) {
+                if (btnTrue) btnTrue.classList.add('correct');
+              } else {
+                if (btnFalse) btnFalse.classList.add('correct');
+              }
+              card.classList.add('answered-correct');
+              fb.className = 'q-feedback correct';
+              fb.innerHTML = `✅ ¡Correcto! <span class="fb-explicacion">${q.exp || ''}</span>`;
+            } else {
+              if (chosen) {
+                if (btnTrue) btnTrue.classList.add('wrong');
+              } else {
+                if (btnFalse) btnFalse.classList.add('wrong');
+              }
+              if (correctAns) {
+                if (btnTrue) btnTrue.classList.add('correct');
+              } else {
+                if (btnFalse) btnFalse.classList.add('correct');
+              }
+              card.classList.add('answered-wrong');
+              fb.className = 'q-feedback wrong';
+              fb.innerHTML = `❌ Incorrecto — La respuesta correcta era: <strong>${correctAns ? 'Verdadero' : 'Falso'}</strong> <span class="fb-explicacion">${q.exp || ''}</span>`;
+            }
+            break;
+          }
+
+          case 'completar': {
+            const input = document.getElementById(`comp-${idx}`);
+            if (input) input.disabled = true;
+            const correctVal = q.ans;
+            if (chosen === null || chosen !== correctVal) {
+              card.classList.add('answered-wrong');
+              fb.className = 'q-feedback wrong';
+              fb.innerHTML = `❌ Incorrecto — La respuesta correcta era: <strong>${correctVal}</strong>`;
+            } else {
+              isCorrect = true;
+              correctCount++;
+              card.classList.add('answered-correct');
+              fb.className = 'q-feedback correct';
+              fb.innerHTML = '✅ ¡Correcto!';
+            }
+            break;
+          }
+
+          case 'drag': {
+            // Bloquear todos los elementos
+            const items = document.querySelectorAll(`#qcard-${idx} .drag-item-asociar`);
+            const zones = document.querySelectorAll(`#qcard-${idx} .drop-zone-asociar`);
+            items.forEach(el => el.classList.add('locked'));
+            zones.forEach(el => el.classList.add('locked'));
+
+            const resOrder = q._resOrder || [];
+            const respuestas = userAnswers[idx] || [];
+            let allCorrect = true;
+            let allFilled = true;
+
+            // Se valida por VALOR (no por posición original): si dos
+            // operaciones distintas dan el mismo resultado, cualquiera de
+            // ellas es válida en esa casilla.
+            for (let i = 0; i < resOrder.length; i++) {
+              const zone = document.getElementById(`drop-res-${idx}-${i}`);
+              const placedOrig = respuestas[i];
+              if (zone) {
+                if (placedOrig === undefined || placedOrig === null) {
+                  allFilled = false;
+                  allCorrect = false;
+                } else if (q.correcta[placedOrig] === q.resultados[resOrder[i]]) {
+                  zone.classList.add('correct');
+                } else {
+                  zone.classList.add('wrong');
+                  allCorrect = false;
+                }
+              }
+            }
+
+            if (allCorrect && allFilled) {
+              isCorrect = true;
+              correctCount++;
+              card.classList.add('answered-correct');
+              fb.className = 'q-feedback correct';
+              fb.innerHTML = '✅ ¡Correcto! Has asociado todas las operaciones correctamente.';
+            } else {
+              card.classList.add('answered-wrong');
+              fb.className = 'q-feedback wrong';
+              let resultadoCorrecto = '';
+              for (let i = 0; i < q.correcta.length; i++) {
+                resultadoCorrecto += `${q.operaciones[i]} → ${q.correcta[i]}`;
+                if (i < q.correcta.length - 1) resultadoCorrecto += ' | ';
+              }
+              fb.innerHTML = `❌ Incorrecto — Las asociaciones correctas son: <strong>${resultadoCorrecto}</strong>`;
+            }
+            break;
+          }
+        }
+      });
+
+      // Calcular estadísticas
+      const wrongCount = selectedQuestions.filter((q, i) => {
+        const ans = userAnswers[i];
+        if (ans === null) return false;
+        if (q.type === 'drag') {
+          const resOrder = q._resOrder || [];
+          if (!Array.isArray(ans)) return true;
+          if (ans.length !== resOrder.length || ans.some(v => v === undefined)) return false;
+          return resOrder.some((orig, j) => q.correcta[ans[j]] !== q.resultados[orig]);
+        }
+        return ans !== (q.type === 'multiple' ? shuffledOptions[i].ansIdx : q.ans);
+      }).length;
+
+      const skippedCount = selectedQuestions.filter((q, i) => {
+        const ans = userAnswers[i];
+        if (ans === null) return true;
+        if (q.type === 'drag') {
+          const resOrder = q._resOrder || [];
+          return !Array.isArray(ans) || ans.length !== resOrder.length || ans.some(v => v === undefined);
+        }
+        return false;
+      }).length;
+
+      const { grade, percentage } = calculateGrade(correctCount, TOTAL_QUESTIONS);
+      const isApproved = grade >= 4.0;
+
+      // Mostrar resultados
+      document.getElementById('r-score').textContent = correctCount;
+      document.getElementById('r-of').textContent = `/ ${TOTAL_QUESTIONS}`;
+      document.getElementById('r-correct').textContent = correctCount;
+      document.getElementById('r-wrong').textContent = wrongCount;
+      document.getElementById('r-skip').textContent = skippedCount;
+
+      const gradeBox = document.getElementById('grade-box');
+      gradeBox.className = `grade-box ${isApproved ? 'approved' : 'failed'}`;
+      gradeBox.innerHTML = `<strong>${isApproved ? '🎉 APROBADO 🎉' : '📖 REPROBADO 📖'}</strong><br>NOTA: ${grade} (${percentage}% de logro)`;
+
+      let title, msg;
+      if (percentage >= 90) {
+        title = '🏆 ¡Excelente!';
+        msg = 'Dominas la multiplicación y división con solidez. ¡Sigue así!';
+      } else if (percentage >= 70) {
+        title = '👍 ¡Muy bien!';
+        msg = 'Tienes un buen dominio. Repasa los temas donde fallaste para mejorar.';
+      } else if (percentage >= 50) {
+        title = '📚 Sigue practicando';
+        msg = 'Vas por buen camino, pero necesitas repasar más la materia.';
+      } else {
+        title = '💪 No te rindas';
+        msg = 'Revisa la clase C1.html y vuelve a intentarlo. ¡Puedes mejorar!';
+      }
+      document.getElementById('result-title').textContent = title;
+      document.getElementById('result-msg').textContent = msg;
+
+      const ring = document.querySelector('.score-ring');
+      if (ring) ring.style.borderColor = percentage >= 70 ? 'var(--verde)' : percentage >= 50 ? 'var(--naranja)' : 'var(--rojo)';
+
+      document.getElementById('questions-wrap').style.display = 'none';
+      document.getElementById('submit-bar').style.display = 'none';
+      document.getElementById('results-wrap').style.display = 'block';
+      document.getElementById('prog-fill').style.width = '100%';
+
+      renderReview();
+
+      document.getElementById('results-wrap').scrollIntoView({ behavior: 'smooth' });
+    }
+
+function renderReview() {
+  const reviewWrap = document.getElementById('review-wrap');
+  reviewWrap.innerHTML = '';
+
+  selectedQuestions.forEach((q, idx) => {
+    const chosen = userAnswers[idx];
+    let isCorrect = false;
+    let contentHtml = '';
+
+    // Determinar si es correcto
+    switch (q.type) {
+      case 'multiple': {
+        const correctAns = shuffledOptions[idx].ansIdx;
+        isCorrect = chosen === correctAns;
+        break;
+      }
+      case 'vf': {
+        const correctAns = q.ans;
+        isCorrect = chosen === correctAns;
+        break;
+      }
+      case 'completar': {
+        const correctVal = q.ans;
+        isCorrect = chosen === correctVal;
+        break;
+      }
+      case 'drag': {
+        const resOrder = q._resOrder || [];
+        let allCorrect = true;
+        let allFilled = true;
+        if (Array.isArray(chosen)) {
+          for (let i = 0; i < resOrder.length; i++) {
+            const placedOrig = chosen[i];
+            if (placedOrig === undefined || placedOrig === null) {
+              allFilled = false;
+            } else if (q.correcta[placedOrig] !== q.resultados[resOrder[i]]) {
+              allCorrect = false;
+            }
+          }
+        } else {
+          allCorrect = false;
+          allFilled = false;
+        }
+        isCorrect = allCorrect && allFilled;
+        break;
+      }
+    }
+
+    // Generar el mismo HTML que en el test
+    switch (q.type) {
+      case 'multiple': {
+        const optData = shuffledOptions[idx];
+        const letters = ['a', 'b', 'c', 'd'];
+        let optsHtml = '';
+        optData.opts.forEach((opt, optIdx) => {
+          let cls = 'opt locked';
+          if (optIdx === optData.ansIdx) cls += ' correct';
+          if (chosen === optIdx && chosen !== optData.ansIdx) cls += ' wrong';
+          optsHtml += `
+            <div class="${cls}">
+              <div class="opt-letter">${letters[optIdx]}</div>
+              <div class="opt-text">${opt}</div>
+            </div>
+          `;
+        });
+        contentHtml = `
+          <div class="q-text">${q.q}</div>
+          <div class="options">${optsHtml}</div>
+        `;
+        break;
+      }
+
+      case 'vf': {
+        const correctAns = q.ans;
+        const btnTrueCls = `vf-btn true ${correctAns ? 'correct' : (chosen === true ? 'wrong' : '')}`;
+        const btnFalseCls = `vf-btn false ${!correctAns ? 'correct' : (chosen === false ? 'wrong' : '')}`;
+        contentHtml = `
+          <div class="q-text">${q.q}</div>
+          <div class="vf-buttons">
+            <button class="${btnTrueCls}" disabled>✅ Verdadero</button>
+            <button class="${btnFalseCls}" disabled>❌ Falso</button>
+          </div>
+          ${q.exp ? `<div style="font-size:0.8rem;color:var(--gris);margin-top:6px;">${q.exp}</div>` : ''}
+        `;
+        break;
+      }
+
+      case 'completar': {
+        const correctVal = q.ans;
+        const inputCls = chosen === correctVal ? 'correct' : (chosen ? 'wrong' : '');
+        const displayVal = chosen || '⬜';
+        contentHtml = `
+          <div class="q-text">${q.q}</div>
+          <div class="input-group">
+            <span style="font-size:1rem;font-weight:700;">=</span>
+            <input type="text" class="${inputCls}" value="${displayVal}" disabled style="width:120px;padding:8px 14px;border-radius:10px;font-size:0.95rem;font-family:'JetBrains Mono',monospace;font-weight:700;border:2px solid var(--borde);background:var(--crema);${chosen === correctVal ? 'border-color:var(--verde);background:#d4efdf;' : (chosen ? 'border-color:var(--rojo);background:#fdeaea;' : '')}">
+            ${chosen !== correctVal && chosen ? `<span class="respuesta-correcta" style="color:var(--rojo);">❌ Incorrecto. La respuesta correcta es ${correctVal}</span>` : ''}
+            ${!chosen ? `<span class="respuesta-correcta" style="color:var(--naranja);">⚪ Sin responder. La respuesta correcta es ${correctVal}</span>` : ''}
+            ${chosen === correctVal ? `<span class="respuesta-correcta" style="color:var(--verde2);">✅ Correcto</span>` : ''}
+          </div>
+        `;
+        break;
+      }
+
+      case 'drag': {
+        const operaciones = q.operaciones;
+        const resultados = q.resultados;
+        const resOrder = q._resOrder || [];
+        const correcta = q.correcta;
+
+        let operacionesHtml = '';
+        operaciones.forEach((op, i) => {
+          const isPlaced = Array.isArray(chosen) && chosen.some(v => v === i);
+          operacionesHtml += `
+            <div class="drag-item-asociar ${isPlaced ? 'placed' : ''}" style="${isPlaced ? 'opacity:0.4;border-color:var(--gris);background:#eee;' : ''}">
+              ${op}
+            </div>
+          `;
+        });
+
+        let resultadosHtml = '';
+        resultados.forEach((res, i) => {
+          const origIdx = resOrder[i] !== undefined ? resOrder[i] : i;
+          const placedOrig = Array.isArray(chosen) ? chosen[i] : undefined;
+          const isFilled = placedOrig !== undefined && placedOrig !== null;
+          let zoneClass = 'drop-zone-asociar filled';
+          let matchText = '';
+
+          if (isFilled) {
+            const opText = operaciones[placedOrig] || '';
+            const isCorrectMatch = correcta[placedOrig] === resultados[origIdx];
+            if (isCorrectMatch) {
+              zoneClass += ' correct';
+              matchText = `${opText} ✓`;
+            } else {
+              zoneClass += ' wrong';
+              matchText = `${opText} ✗`;
+            }
+          } else {
+            zoneClass += ' empty';
+            matchText = '⬜';
+          }
+
+          resultadosHtml += `
+            <div class="${zoneClass}" style="${isFilled ? '' : 'border-color:var(--gris);'}">
+              <span class="resultado-num">${res}</span>
+              <span class="resultado-match" style="font-size:0.72rem;font-weight:600;${isFilled ? 'display:block;' : 'display:none;'}">${isFilled ? matchText : ''}</span>
+            </div>
+          `;
+        });
+
+        contentHtml = `
+          <div class="q-text">Asocia cada operación con su resultado:</div>
+          <div class="drag-asociar" style="pointer-events:none;opacity:0.9;">
+            <div class="columna">
+              <div class="titulo-col">📝 Operaciones</div>
+              ${operacionesHtml}
+            </div>
+            <div class="conexion-linea">⟷</div>
+            <div class="columna">
+              <div class="titulo-col">🎯 Resultados</div>
+              ${resultadosHtml}
+            </div>
+          </div>
+        `;
+        break;
+      }
+    }
+
+    // Crear tarjeta de revisión
+    const reviewCard = document.createElement('div');
+    reviewCard.className = `review-card ${isCorrect ? 'correct' : 'wrong'}`;
+    reviewCard.style.borderLeft = `4px solid ${isCorrect ? 'var(--verde)' : 'var(--rojo)'}`;
+    reviewCard.style.background = isCorrect ? '#d4efdf' : '#fdeaea';
+
+    reviewCard.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+        <strong style="color:var(--azul2);">Pregunta ${idx + 1} ${isCorrect ? '✅' : '❌'}</strong>
+        <span style="font-size:0.65rem;color:var(--gris);">${isCorrect ? '✓ Correcta' : (chosen === null || (q.type === 'drag' && !Array.isArray(chosen)) ? '○ Sin responder' : '✗ Incorrecta')}</span>
+      </div>
+      ${contentHtml}
+    `;
+    reviewWrap.appendChild(reviewCard);
+  });
+}
+
+    // ============================================================
+    // FUNCIONES DE CONTROL
+    // ============================================================
+    function startTest() {
+      buildTest();
+      submitted = false;
+      document.getElementById('intro-card').style.display = 'none';
+      document.getElementById('results-wrap').style.display = 'none';
+      renderQuestions();
+      document.getElementById('questions-wrap').style.display = 'flex';
+      document.getElementById('submit-bar').style.display = 'flex';
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function restartTest() {
+      buildTest();
+      submitted = false;
+      document.getElementById('results-wrap').style.display = 'none';
+      renderQuestions();
+      document.getElementById('questions-wrap').style.display = 'flex';
+      document.getElementById('submit-bar').style.display = 'flex';
+      updateProgress();
+      document.getElementById('intro-card').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function cancelTest() {
+      if (confirm('¿Estás seguro de que quieres cancelar el test? Perderás tu progreso.')) {
+        document.getElementById('questions-wrap').style.display = 'none';
+        document.getElementById('submit-bar').style.display = 'none';
+        document.getElementById('intro-card').style.display = 'block';
+        document.getElementById('prog-fill').style.width = '0%';
+        submitted = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+
+</body>
+</html>

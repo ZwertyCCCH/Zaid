@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 1 · Multiplicación y División · 6° Básico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Fredoka+One&family=Source+Sans+3:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Quicksand', 'Source Sans 3', sans-serif;
+            background: #1d4357;
+        }
+
+        :root {
+            --naranja: #e0911a;
+            --naranja-light: #f5a623;
+            --azul: #2c5f7a;
+            --azul2: #1d4357;
+            --verde: #48b28a;
+            --verde2: #328f6b;
+            --morado: #8e44ad;
+            --rojo: #c0392b;
+            --crema: #f6f2eb;
+            --gris: #6a7b8c;
+            --borde: #d7cdbc;
+            --blanco: #ffffff;
+            --amarillo-resalte: #fef3c7;
+        }
+
+        #app {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 62px);
+            overflow: hidden;
+        }
+
+        /* ─── SLIDES ─── */
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            background: var(--crema);
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* ─── HEADER ─── */
+        .s-header {
+            background: linear-gradient(145deg, var(--azul) 0%, var(--azul2) 100%);
+            padding: 14px 28px 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+            border-bottom: 5px solid var(--naranja);
+        }
+
+        .s-header .badge {
+            background: var(--naranja);
+            color: var(--azul2);
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.65rem;
+            padding: 4px 14px;
+            border-radius: 30px;
+            white-space: nowrap;
+        }
+
+        .s-header h2 {
+            font-family: 'Fredoka One', cursive;
+            color: white;
+            font-size: 1.3rem;
+            flex: 1;
+            letter-spacing: -0.3px;
+        }
+
+        .s-num {
+            color: var(--naranja-light);
+            font-weight: 700;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        /* ─── BODY ─── */
+        .s-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 28px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .s-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .s-body::-webkit-scrollbar-thumb {
+            background: var(--naranja);
+            border-radius: 10px;
+        }
+
+        /* ─── CONTENIDO ─── */
+        .intro-text {
+            font-size: 0.95rem;
+            color: #1e2b3c;
+            line-height: 1.6;
+            background: white;
+            padding: 10px 16px;
+            border-radius: 16px;
+            border-left: 5px solid var(--naranja);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .intro-text strong {
+            color: var(--azul);
+        }
+
+        .sec-label {
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gris);
+            margin-bottom: 2px;
+        }
+
+        .rule-box {
+            background: white;
+            border-radius: 16px;
+            padding: 12px 16px;
+            border-left: 6px solid var(--azul);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .rule-box.naranja {
+            border-left-color: var(--naranja);
+        }
+
+        .rule-box.verde {
+            border-left-color: var(--verde);
+        }
+
+        .rule-box.rojo {
+            border-left-color: var(--rojo);
+        }
+
+        .rule-box.morado {
+            border-left-color: var(--morado);
+        }
+
+        .rule-box .titulo {
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rule-box p,
+        .rule-box li {
+            font-size: 0.88rem;
+            color: #1e2b3c;
+            line-height: 1.6;
+        }
+
+        .rule-box ul {
+            padding-left: 18px;
+        }
+
+        .ejemplo-box {
+            background: #faf7f0;
+            border-radius: 12px;
+            padding: 10px 14px;
+            border: 2px dashed var(--borde);
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: #1e2b3c;
+        }
+
+        .ejemplo-box .destacar {
+            background: var(--amarillo-resalte);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* ─── NUEVA TABLA DE DIVISIÓN (CORREGIDA) ─── */
+        .division-tabla {
+            display: inline-block;
+            border: 3px solid var(--azul);
+            border-radius: 12px;
+            background: white;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            min-width: 280px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .division-tabla table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        .division-tabla td {
+            width: 36px;
+            height: 32px;
+            text-align: center;
+            vertical-align: middle;
+            padding: 2px 4px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .division-tabla .vacio {
+            color: #ccc;
+        }
+
+        .division-tabla .divisor {
+            color: var(--naranja);
+        }
+
+        .division-tabla .dividendo {
+            color: var(--azul);
+        }
+
+        .division-tabla .cociente {
+            color: var(--verde);
+        }
+
+        .division-tabla .resto {
+            color: var(--rojo);
+        }
+
+        .division-tabla .parcial {
+            color: var(--morado);
+        }
+
+        .division-tabla .resaltado {
+            background: var(--amarillo-resalte);
+            border-radius: 4px;
+        }
+
+        .division-tabla .flecha {
+            color: var(--rojo);
+            font-size: 1.4rem;
+            animation: bounce-down 0.8s ease-in-out infinite alternate;
+            display: inline-block;
+        }
+
+        @keyframes bounce-down {
+            from {
+                transform: translateY(-4px);
+            }
+
+            to {
+                transform: translateY(6px);
+            }
+        }
+
+        .division-tabla .etiqueta {
+            font-size: 0.7rem;
+            color: var(--gris);
+            font-weight: 400;
+            padding-left: 6px;
+        }
+
+        .division-tabla .borde-superior {
+            border-top: 2px solid var(--borde);
+        }
+
+        .division-tabla .borde-inferior {
+            border-bottom: 2px solid var(--borde);
+        }
+
+        .division-tabla .col-divisor {
+            width: 30px;
+            padding-right: 8px;
+            text-align: right;
+            color: var(--naranja);
+            font-weight: 700;
+        }
+
+        .division-tabla .col-cociente {
+            text-align: right;
+            padding-right: 8px;
+            color: var(--verde);
+            font-weight: 700;
+        }
+
+        /* Tabla de múltiplos (apoyo) */
+        .tabla-multiplos {
+            display: inline-block;
+            border: 2px solid var(--borde);
+            border-radius: 8px;
+            padding: 6px 12px;
+            background: #f8f5f0;
+            font-size: 0.85rem;
+            vertical-align: top;
+            margin-left: 16px;
+        }
+
+        .tabla-multiplos .fila {
+            display: flex;
+            gap: 16px;
+            padding: 2px 0;
+            border-bottom: 1px solid #ede7dd;
+        }
+
+        .tabla-multiplos .fila:last-child {
+            border-bottom: none;
+        }
+
+        .tabla-multiplos .activo {
+            background: var(--amarillo-resalte);
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        .tabla-multiplos .demasiado {
+            color: var(--rojo);
+            text-decoration: line-through;
+        }
+
+        /* ─── PASO A PASO ─── */
+        .paso-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .paso-container .paso-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .paso-container .paso-visual {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        /* ─── DOS COLUMNAS ─── */
+        .dos-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .tres-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* ─── COVER ─── */
+        .cover-slide {
+            background: linear-gradient(145deg, var(--azul) 0%, var(--azul2) 100%) !important;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 0 !important;
+            padding: 0 !important;
+        }
+
+        .cover-slide .cover-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding: 30px;
+        }
+
+        .cover-icono {
+            font-size: 3.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            padding: 12px;
+            border: 3px solid var(--naranja);
+        }
+
+        .cover-nivel {
+            background: var(--naranja);
+            color: var(--azul2);
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9rem;
+            padding: 6px 24px;
+            border-radius: 40px;
+        }
+
+        .cover-title {
+            font-family: 'Fredoka One', cursive;
+            color: white;
+            font-size: 2.6rem;
+            line-height: 1.1;
+            max-width: 700px;
+        }
+
+        .cover-title span {
+            color: var(--naranja-light);
+        }
+
+        .cover-sub {
+            color: #d6e6f0;
+            font-size: 0.95rem;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .cover-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cover-tag {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            color: var(--naranja-light);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* ─── CUADRÍCULA HINDÚ (MEJORADA) ─── */
+        .hindú-grid {
+            display: inline-block;
+            border: 3px solid var(--azul);
+            border-radius: 10px;
+            background: white;
+            padding: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            font-family: 'Courier New', monospace;
+        }
+
+        .hindú-grid .fila-grid {
+            display: flex;
+        }
+
+        .hindú-grid .celda {
+            width: 56px;
+            height: 56px;
+            border: 1px solid var(--azul);
+            position: relative;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Encabezados (factores) */
+        .hindú-grid .celda-header {
+            background: var(--azul);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-color: var(--azul);
+        }
+
+        /* Línea diagonal que cruza la celda de esquina a esquina */
+        .hindú-grid .celda .diagonal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            /* Diagonal de superior derecha a inferior izquierda (\) */
+            background: linear-gradient(to bottom right,
+                    transparent calc(50% - 1px),
+                    var(--borde) 50%,
+                    transparent calc(50% + 1px));
+        }
+
+        /* Número de las decenas (arriba a la derecha) */
+        .hindú-grid .celda .num-sup {
+            position: absolute;
+            top: 4px;
+            left: 5px;
+            font-size: 0.95rem;
+            color: var(--morado);
+            font-weight: 700;
+        }
+
+        /* Número de las unidades (abajo a la izquierda) */
+        .hindú-grid .celda .num-inf {
+            position: absolute;
+            bottom: 4px;
+            right: 5px;
+            font-size: 0.95rem;
+            color: var(--azul);
+            font-weight: 700;
+        }
+
+        /* Fila del resultado (suma en diagonal) */
+        .hindú-grid .fila-resultado {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .hindú-grid .fila-resultado .digito {
+            background: var(--verde);
+            color: white;
+            padding: 2px 14px;
+            border-radius: 6px;
+        }
+
+        /* Ajuste responsive para pantallas pequeñas */
+        @media (max-width: 700px) {
+            .hindú-grid .celda {
+                width: 42px;
+                height: 42px;
+            }
+
+            .hindú-grid .celda .num-sup,
+            .hindú-grid .celda .num-inf {
+                font-size: 0.75rem;
+            }
+
+            .hindú-grid .celda-header {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Colores de fondo para diagonales (método hindú) */
+        .hindú-grid .diagonal-1 {
+            background: #f8d7da;
+        }
+
+        .hindú-grid .diagonal-2 {
+            background: #d4edda;
+        }
+
+        .hindú-grid .diagonal-3 {
+            background: #cce5ff;
+        }
+
+        .hindú-grid .diagonal-4 {
+            background: #fff3cd;
+        }
+
+        /* Para que las diagonales sigan viéndose encima del color */
+        .hindú-grid .diagonal-1 .diagonal,
+        .hindú-grid .diagonal-2 .diagonal,
+        .hindú-grid .diagonal-3 .diagonal,
+        .hindú-grid .diagonal-4 .diagonal {
+            background: linear-gradient(to bottom right,
+                    transparent calc(50% - 1px),
+                    var(--borde) 50%,
+                    transparent calc(50% + 1px));
+        }
+
+        .hindú-grid .celda-mitad {
+            --color-sup: transparent;
+            --color-inf: transparent;
+            background: linear-gradient(to bottom right, var(--color-sup) 50%, var(--color-inf) 50%);
+        }
+
+        /* Colores disponibles para el triángulo superior */
+        .hindú-grid .sup-rosa {
+            --color-sup: #f8d7da;
+        }
+
+        .hindú-grid .sup-verde {
+            --color-sup: #d4edda;
+        }
+
+        .hindú-grid .sup-azul {
+            --color-sup: #cce5ff;
+        }
+
+        .hindú-grid .sup-amarillo {
+            --color-sup: #fff3cd;
+        }
+
+        .hindú-grid .sup-morado {
+            --color-sup: #ecdff5;
+        }
+
+
+
+        /* Colores disponibles para el triángulo inferior */
+        .hindú-grid .inf-rosa {
+            --color-inf: #f8d7da;
+        }
+
+        .hindú-grid .inf-verde {
+            --color-inf: #d4edda;
+        }
+
+        .hindú-grid .inf-azul {
+            --color-inf: #cce5ff;
+        }
+
+        .hindú-grid .inf-amarillo {
+            --color-inf: #fff3cd;
+        }
+
+        .hindú-grid .inf-morado {
+            --color-inf: #ecdff5;
+        }
+
+        /* ─── NAVEGACIÓN ─── */
+        #nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--azul2);
+            border-top: 4px solid var(--naranja);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 16px;
+            z-index: 100;
+            gap: 8px;
+            height: 62px;
+        }
+
+        .nav-btn {
+            background: var(--azul);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 0.78rem;
+            transition: background 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            background: var(--naranja);
+            color: var(--azul2);
+            transform: scale(1.02);
+        }
+
+        .nav-btn:disabled {
+            background: #3a4a5a;
+            color: #6a7a8a;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .nav-btn.gold {
+            background: var(--naranja);
+            color: var(--azul2);
+        }
+
+        .nav-btn.gold:hover {
+            background: var(--naranja-light);
+        }
+
+        .nav-btn.verde {
+            background: var(--verde);
+            color: white;
+        }
+
+        .nav-btn.verde:hover {
+            background: var(--verde2);
+        }
+
+        #progress-wrap {
+            flex: 1;
+            max-width: 280px;
+        }
+
+        #progress-bar {
+            height: 5px;
+            background: #2a4a5a;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #progress-fill {
+            height: 100%;
+            background: var(--naranja);
+            transition: width 0.4s;
+        }
+
+        #slide-label {
+            color: #a0b8d0;
+            font-size: 0.62rem;
+            text-align: center;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide.active {
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        @media (max-width: 700px) {
+            .s-header {
+                padding: 10px 14px;
+            }
+
+            .s-header h2 {
+                font-size: 1rem;
+            }
+
+            .s-body {
+                padding: 12px 14px;
+            }
+
+            .dos-col,
+            .tres-col {
+                grid-template-columns: 1fr;
+            }
+
+            .cover-title {
+                font-size: 1.8rem;
+            }
+
+            .nav-btn {
+                font-size: 0.65rem;
+                padding: 4px 10px;
+            }
+
+            .division-tabla {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            .division-tabla td {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
+
+            .paso-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- ═══ SLIDE 1 – PORTADA ═══ -->
+        <div class="slide cover-slide active" id="s1">
+            <div class="cover-inner">
+                <div class="cover-icono">📐</div>
+                <div class="cover-nivel">Clase 1 · 6° Básico</div>
+                <div class="cover-title">Multiplicación y<br><span>División</span></div>
+                <div class="cover-sub">Aprende a multiplicar y dividir con métodos visuales.<br>5 ejemplos de cada
+                    operación, paso a paso.</div>
+                <div class="cover-tags">
+                    <span class="cover-tag">✖️ Multiplicación</span>
+                    <span class="cover-tag">➗ División</span>
+                    <span class="cover-tag">🔢 Decimales</span>
+                    <span class="cover-tag">📊 Método hindú</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 2 – PARTES DE LA DIVISIÓN (CORREGIDO) ═══ -->
+        <div class="slide" id="s2">
+            <div class="s-header">
+                <span class="badge">➗ DIVISIÓN</span>
+                <h2>Partes de una división</h2>
+                <span class="s-num">2 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Una división tiene <strong>4 partes</strong> principales. Conócelas con este ejemplo:
+                </div>
+                <div class="division-tabla">
+                    <table>
+                        <tr>
+                            <td colspan="2"
+                                style="text-align:right;padding-right:8px;color:var(--verde);font-weight:700;font-size:1.2rem;">
+                                39</td>
+                            <td colspan="3"
+                                style="text-align:left;color:var(--verde);font-size:0.8rem;font-weight:400;">← Cociente
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-divisor" style="font-size:1.2rem;">4</td>
+                            <td style="border-left:3px solid var(--azul);"></td>
+                            <td class="dividendo" style="font-size:1.2rem;">1</td>
+                            <td class="dividendo" style="font-size:1.2rem;">5</td>
+                            <td class="dividendo" style="font-size:1.2rem;">6</td>
+                            <td style="color:var(--azul);font-weight:700;font-size:0.8rem;padding-left:6px;">← Dividendo
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="color:var(--naranja);font-weight:700;font-size:0.8rem;padding-right:8px;text-align:right;">
+                                ← Divisor</td>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="resto" style="font-size:1.2rem;border-top:2px solid var(--borde);">0</td>
+                            <td colspan="2"
+                                style="color:var(--rojo);font-weight:700;font-size:0.8rem;padding-left:6px;">← Resto
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="dos-col">
+                    <div class="rule-box">
+                        <div class="titulo"><span style="color:var(--azul);">🔵 Dividendo</span></div>
+                        <p>Número que se <strong>reparte</strong> o divide. (156)</p>
+                    </div>
+                    <div class="rule-box naranja">
+                        <div class="titulo"><span style="color:var(--naranja);">🟠 Divisor</span></div>
+                        <p>Número <strong>entre el cual</strong> se divide. (4)</p>
+                    </div>
+                    <div class="rule-box verde">
+                        <div class="titulo"><span style="color:var(--verde);">🟢 Cociente</span></div>
+                        <p><strong>Resultado</strong> de la división. (39)</p>
+                    </div>
+                    <div class="rule-box rojo">
+                        <div class="titulo"><span style="color:var(--rojo);">🔴 Resto</span></div>
+                        <p>Lo que <strong>sobra</strong> cuando la división no es exacta. (0)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 3 – PARTES DE LA MULTIPLICACIÓN ═══ -->
+        <div class="slide" id="s3">
+            <div class="s-header">
+                <span class="badge">✖️ MULTIPLICACIÓN</span>
+                <h2>Partes de una multiplicación</h2>
+                <span class="s-num">3 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Una multiplicación tiene <strong>3 partes</strong> principales.
+                </div>
+                <div class="rule-box" style="text-align:center;font-size:1.4rem;padding:16px;">
+                    <span style="color:var(--azul);font-weight:700;">23</span>
+                    <span style="font-size:1.8rem;"> × </span>
+                    <span style="color:var(--naranja);font-weight:700;">14</span>
+                    <span style="font-size:1.8rem;"> = </span>
+                    <span style="color:var(--verde);font-weight:700;">322</span>
+                </div>
+                <div class="dos-col">
+                    <div class="rule-box">
+                        <div class="titulo"><span style="color:var(--azul);">🔵 Factores</span></div>
+                        <p>Los números que se <strong>multiplican</strong>. (23 y 14)</p>
+                    </div>
+                    <div class="rule-box verde">
+                        <div class="titulo"><span style="color:var(--verde);">🟢 Producto</span></div>
+                        <p><strong>Resultado</strong> de la multiplicación. (322)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 4 – DIVISIÓN EJEMPLO 1: 156 ÷ 4 (PASO 1) CORREGIDO ═══ -->
+        <div class="slide" id="s4">
+            <div class="s-header">
+                <span class="badge">➗ EJEMPLO 1</span>
+                <h2>División: 156 ÷ 4</h2>
+                <span class="s-num">4 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    <strong>Paso 1:</strong> ¿Cuántas veces cabe <span
+                        style="color:var(--naranja);font-weight:700;">4</span> en <span
+                        style="color:var(--azul);font-weight:700;">15</span>?
+                </div>
+                <div class="paso-container">
+                    <div class="paso-visual">
+                        <div class="division-tabla">
+                            <table>
+                                <!-- Cociente -->
+                                <tr>
+                                    <td class="col-cociente" style="font-size:1.2rem;">3</td>
+                                    <td colspan="2"
+                                        style="text-align:left;color:var(--verde);font-size:0.8rem;font-weight:400;">←
+                                        Cociente</td>
+                                </tr>
+                                <!-- Divisor y dividendo -->
+                                <tr>
+                                    <td class="col-divisor" style="font-size:1.1rem;">4</td>
+                                    <td style="border-left:3px solid var(--azul);"></td>
+                                    <td class="dividendo resaltado" style="font-size:1.1rem;">1</td>
+                                    <td class="dividendo resaltado" style="font-size:1.1rem;">5</td>
+                                    <td class="dividendo" style="font-size:1.1rem;">6</td>
+                                </tr>
+                                <!-- Primera multiplicación parcial -->
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="parcial" style="font-size:1.1rem;">1</td>
+                                    <td class="parcial" style="font-size:1.1rem;">2</td>
+                                    <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 4×3=12</td>
+                                </tr>
+                                <!-- Resto parcial -->
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="vacio">0</td>
+                                    <td style="color:#888;">3</td>
+                                    <td style="color:#888;font-size:0.7rem;padding-left:4px;">← Resto parcial</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="paso-info">
+                        <div class="rule-box naranja">
+                            <div class="titulo">📊 Tabla de múltiplos de 4</div>
+                            <div style="font-size:0.9rem;line-height:1.8;">
+                                <div>4 × 1 = 4</div>
+                                <div>4 × 2 = 8</div>
+                                <div
+                                    style="background:var(--amarillo-resalte);font-weight:700;padding:0 4px;border-radius:4px;">
+                                    4 × 3 = 12 ← ¡cabe!</div>
+                                <div style="color:var(--rojo);text-decoration:line-through;">4 × 4 = 16 ← muy grande
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-size:0.85rem;color:var(--gris);">
+                            <span class="flecha">↓</span> El 3 va al cociente
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 5 – DIVISIÓN EJEMPLO 1: 156 ÷ 4 (PASO 2) CORREGIDO ═══ -->
+        <div class="slide" id="s5">
+            <div class="s-header">
+                <span class="badge">➗ EJEMPLO 1</span>
+                <h2>División: 156 ÷ 4 (Paso 2)</h2>
+                <span class="s-num">5 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    <strong>Paso 2:</strong> Restamos y <span style="color:var(--rojo);font-weight:700;">bajamos</span>
+                    el siguiente dígito.
+                </div>
+                <div class="paso-container">
+                    <div class="paso-visual">
+                        <div class="division-tabla">
+                            <table>
+                                <tr>
+                                    <td class="col-cociente" style="font-size:1.2rem;">3</td>
+                                    <td colspan="2"
+                                        style="text-align:left;color:var(--verde);font-size:0.8rem;font-weight:400;">←
+                                        Cociente</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-divisor" style="font-size:1.1rem;">4</td>
+                                    <td style="border-left:3px solid var(--azul);"></td>
+                                    <td class="dividendo" style="font-size:1.1rem;">1</td>
+                                    <td class="dividendo" style="font-size:1.1rem;">5</td>
+                                    <td class="dividendo resaltado"
+                                        style="font-size:1.1rem;background:var(--amarillo-resalte);">6</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="parcial" style="font-size:1.1rem;">1</td>
+                                    <td class="parcial" style="font-size:1.1rem;">2</td>
+                                    <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 4×3=12</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="vacio">0</td>
+                                    <td style="color:var(--rojo);font-weight:700;">3</td>
+                                    <td style="color:var(--rojo);font-weight:700;font-size:1.2rem;">6</td>
+                                    <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Bajamos el 6</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td colspan="3" style="text-align:left;font-size:1.2rem;color:var(--rojo);">
+                                        <span class="flecha">↓</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="paso-info">
+                        <div class="rule-box verde">
+                            <div class="titulo">📌 ¿Qué hicimos?</div>
+                            <ul>
+                                <li>Restamos: 15 − 12 = <strong style="color:var(--rojo);">3</strong></li>
+                                <li><strong style="color:var(--rojo);">Bajamos</strong> el 6 → <strong
+                                        style="color:var(--rojo);">36</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 6 – DIVISIÓN EJEMPLO 1: 156 ÷ 4 (PASO 3) CORREGIDO ═══ -->
+        <div class="slide" id="s6">
+            <div class="s-header">
+                <span class="badge">➗ EJEMPLO 1</span>
+                <h2>División: 156 ÷ 4 (Paso 3)</h2>
+                <span class="s-num">6 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    <strong>Paso 3:</strong> ¿Cuántas veces cabe <span
+                        style="color:var(--naranja);font-weight:700;">4</span> en <span
+                        style="color:var(--rojo);font-weight:700;">36</span>?
+                </div>
+                <div class="paso-container">
+                    <div class="paso-visual">
+                        <div class="division-tabla">
+                            <table>
+                                <tr>
+                                    <td class="col-cociente" style="font-size:1.2rem;">3</td>
+                                    <td class="col-cociente"
+                                        style="font-size:1.2rem;background:var(--amarillo-resalte);border-radius:4px;">9
+                                    </td>
+                                    <td style="text-align:left;color:var(--verde);font-size:0.8rem;font-weight:400;">←
+                                        Cociente</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-divisor" style="font-size:1.1rem;">4</td>
+                                    <td style="border-left:3px solid var(--azul);"></td>
+                                    <td class="dividendo" style="font-size:1.1rem;">1</td>
+                                    <td class="dividendo" style="font-size:1.1rem;">5</td>
+                                    <td class="dividendo" style="font-size:1.1rem;">6</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="parcial" style="font-size:1.1rem;">1</td>
+                                    <td class="parcial" style="font-size:1.1rem;">2</td>
+                                    <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 4×3=12</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="vacio">0</td>
+                                    <td style="color:var(--rojo);">3</td>
+                                    <td style="color:var(--rojo);">6</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="parcial" style="font-size:1.1rem;">3</td>
+                                    <td class="parcial" style="font-size:1.1rem;">6</td>
+                                    <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 4×9=36</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="resto" style="font-size:1.1rem;">0</td>
+                                    <td colspan="2" style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto
+                                        final</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="paso-info">
+                        <div class="rule-box naranja">
+                            <div class="titulo">📊 Tabla de múltiplos de 4</div>
+                            <div style="font-size:0.9rem;line-height:1.8;">
+                                <div>4 × 8 = 32</div>
+                                <div
+                                    style="background:var(--amarillo-resalte);font-weight:700;padding:0 4px;border-radius:4px;">
+                                    4 × 9 = 36 ← ¡cabe!</div>
+                                <div style="color:var(--rojo);text-decoration:line-through;">4 × 10 = 40 ← muy grande
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rule-box verde">
+                            <div class="titulo">✅ Resultado final</div>
+                            <div style="font-size:1.2rem;font-weight:700;color:var(--verde);">156 ÷ 4 = 39</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 7 – DIVISIÓN EJEMPLO 2: 725 ÷ 5 (CORREGIDO) ═══ -->
+        <div class="slide" id="s7">
+            <div class="s-header">
+                <span class="badge">➗ EJEMPLO 2</span>
+                <h2>División: 725 ÷ 5</h2>
+                <span class="s-num">7 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Resolvamos <strong style="color:var(--azul);">725</strong> ÷ <strong
+                        style="color:var(--naranja);">5</strong> paso a paso.
+                </div>
+                <div class="division-tabla">
+                    <table>
+                        <tr>
+                            <td class="col-cociente" style="font-size:1.2rem;">1</td>
+                            <td class="col-cociente" style="font-size:1.2rem;">4</td>
+                            <td class="col-cociente" style="font-size:1.2rem;">5</td>
+                            <td style="text-align:left;color:var(--verde);font-size:0.8rem;font-weight:400;">← Cociente
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-divisor" style="font-size:1.1rem;">5</td>
+                            <td style="border-left:3px solid var(--azul);"></td>
+                            <td class="dividendo" style="font-size:1.1rem;">7</td>
+                            <td class="dividendo" style="font-size:1.1rem;">2</td>
+                            <td class="dividendo" style="font-size:1.1rem;">5</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-5</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;" colspan="2">← 5×1=5</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="color:var(--rojo);">2</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="color:var(--rojo);">2</td>
+                            <td style="color:var(--rojo);font-weight:700;font-size:1.1rem;">2</td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Bajamos el 2</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-2</td>
+                            <td class="parcial" style="font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 5×4=20</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="vacio">0</td>
+                            <td style="color:var(--rojo);">2</td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-weight:700;">2</td>
+                            <td style="color:var(--rojo);font-weight:700;font-size:1.1rem;">5</td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Bajamos el 5</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-2</td>
+                            <td class="parcial" style="font-size:1.1rem;">5</td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 5×5=25</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="resto" style="font-size:1.1rem;">0</td>
+                            <td colspan="2" style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto final
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="rule-box verde">
+                    <div class="titulo">✅ Resultado</div>
+                    <div style="font-size:1.2rem;font-weight:700;color:var(--verde);">725 ÷ 5 = 145</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 8 – DIVISIÓN EJEMPLO 3: 648 ÷ 6 (CORREGIDO) ═══ -->
+        <div class="slide" id="s8">
+            <div class="s-header">
+                <span class="badge">➗ EJEMPLO 3</span>
+                <h2>División: 648 ÷ 6</h2>
+                <span class="s-num">8 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Resolvamos <strong style="color:var(--azul);">648</strong> ÷ <strong
+                        style="color:var(--naranja);">6</strong>.
+                </div>
+                <div class="division-tabla">
+                    <table>
+                        <tr>
+                            <td class="col-cociente" style="font-size:1.2rem;">1</td>
+                            <td class="col-cociente" style="font-size:1.2rem;">0</td>
+                            <td class="col-cociente" style="font-size:1.2rem;">8</td>
+                            <td style="text-align:left;color:var(--verde);font-size:0.8rem;font-weight:400;">← Cociente
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-divisor" style="font-size:1.1rem;">6</td>
+                            <td style="border-left:3px solid var(--azul);"></td>
+                            <td class="dividendo" style="font-size:1.1rem;">6</td>
+                            <td class="dividendo" style="font-size:1.1rem;">4</td>
+                            <td class="dividendo" style="font-size:1.1rem;">8</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-6</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;" colspan="2">← 6×1=6</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="vacio">0</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="vacio">0</td>
+                            <td style="color:var(--rojo);font-weight:700;font-size:1.1rem;">4</td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Bajamos el 4</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-0</td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;" colspan="2">← 6×0=0</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="vacio">0</td>
+                            <td style="color:var(--rojo);">4</td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-weight:700;">4</td>
+                            <td style="color:var(--rojo);font-weight:700;font-size:1.1rem;">8</td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Bajamos el 8</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-4</td>
+                            <td class="parcial" style="font-size:1.1rem;">8</td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 6×8=48</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="resto" style="font-size:1.1rem;">0</td>
+                            <td colspan="2" style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto final
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="rule-box verde">
+                    <div class="titulo">✅ Resultado</div>
+                    <div style="font-size:1.2rem;font-weight:700;color:var(--verde);">648 ÷ 6 = 108</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 9 – DIVISIÓN CON DECIMALES: 15 ÷ 4 (CORREGIDO) ═══ -->
+        <div class="slide" id="s9">
+            <div class="s-header">
+                <span class="badge">➗ DECIMALES</span>
+                <h2>División con decimales: 15 ÷ 4</h2>
+                <span class="s-num">9 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Cuando la división <strong>no es exacta</strong>, podemos <strong>agregar ceros</strong> y seguir
+                    dividiendo.
+                </div>
+                <div class="division-tabla">
+                    <table>
+                        <tr>
+                            <td class="col-cociente" style="font-size:1.2rem;">3</td>
+                            <td class="col-cociente" style="font-size:1.2rem;color:var(--morado);">,</td>
+                            <td class="col-cociente" style="font-size:1.2rem;">7</td>
+                            <td class="col-cociente" style="font-size:1.2rem;">5</td>
+                            <td style="text-align:left;color:var(--verde);font-size:0.8rem;font-weight:400;">← Cociente
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-divisor" style="font-size:1.1rem;">4</td>
+                            <td style="border-left:3px solid var(--azul);"></td>
+                            <td class="dividendo" style="font-size:1.1rem;">1</td>
+                            <td class="dividendo" style="font-size:1.1rem;">5</td>
+                            <td style="color:var(--morado);font-size:0.9rem;">,</td>
+                            <td class="dividendo" style="font-size:1.1rem;color:var(--morado);">0</td>
+                            <td class="dividendo" style="font-size:1.1rem;color:var(--morado);">0</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-1</td>
+                            <td class="parcial" style="font-size:1.1rem;">2</td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2" style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 4×3=12</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="vacio">0</td>
+                            <td style="color:var(--rojo);">3</td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2" style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto 3</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-weight:700;">3</td>
+                            <td style="color:var(--rojo);font-weight:700;font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Al colocal la coma en el
+                                cociente, bajamos 0 (decimal)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-2</td>
+                            <td class="parcial" style="font-size:1.1rem;">8</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 4×7=28</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="vacio">0</td>
+                            <td style="color:var(--rojo);">2</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto 2</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-weight:700;">2</td>
+                            <td style="color:var(--rojo);font-weight:700;font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Bajamos 0</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-2</td>
+                            <td class="parcial" style="font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 4×5=20</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="resto" style="font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2" style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto final
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="rule-box verde">
+                    <div class="titulo">✅ Resultado</div>
+                    <div style="font-size:1.2rem;font-weight:700;color:var(--verde);">15 ÷ 4 = 3,75</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 10 – DIVISIÓN CON DECIMALES: 22 ÷ 8 (CORREGIDO) ═══ -->
+        <div class="slide" id="s10">
+            <div class="s-header">
+                <span class="badge">➗ DECIMALES</span>
+                <h2>División con decimales: 22 ÷ 8</h2>
+                <span class="s-num">10 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Resolvamos <strong style="color:var(--azul);">22</strong> ÷ <strong
+                        style="color:var(--naranja);">8</strong> con decimales.
+                </div>
+                <div class="division-tabla">
+                    <table>
+                        <tr>
+                            <td class="col-cociente" style="font-size:1.2rem;">2</td>
+                            <td class="col-cociente" style="font-size:1.2rem;color:var(--morado);">,</td>
+                            <td class="col-cociente" style="font-size:1.2rem;">7</td>
+                            <td class="col-cociente" style="font-size:1.2rem;">5</td>
+                            <td style="text-align:left;color:var(--verde);font-size:0.8rem;font-weight:400;">← Cociente
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-divisor" style="font-size:1.1rem;">8</td>
+                            <td style="border-left:3px solid var(--azul);"></td>
+                            <td class="dividendo" style="font-size:1.1rem;">2</td>
+                            <td class="dividendo" style="font-size:1.1rem;">2</td>
+                            <td style="color:var(--morado);font-size:0.9rem;">,</td>
+                            <td class="dividendo" style="font-size:1.1rem;color:var(--morado);">0</td>
+                            <td class="dividendo" style="font-size:1.1rem;color:var(--morado);">0</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-1</td>
+                            <td class="parcial" style="font-size:1.1rem;">6</td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2" style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 8×2=16</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="vacio">0</td>
+                            <td style="color:var(--rojo);">6</td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2" style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto 6</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-weight:700;">6</td>
+                            <td style="color:var(--rojo);font-weight:700;font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Al agregar una coma en el
+                                cociente, bajamos 0</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-5</td>
+                            <td class="parcial" style="font-size:1.1rem;">6</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 8×7=56</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="vacio">0</td>
+                            <td style="color:var(--rojo);">4</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto 4</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-weight:700;">4</td>
+                            <td style="color:var(--rojo);font-weight:700;font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Bajamos 0</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="parcial" style="font-size:1.1rem;">-4</td>
+                            <td class="parcial" style="font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td></td>
+                            <td style="color:var(--morado);font-size:0.7rem;padding-left:4px;">← 8×5=40</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="resto" style="font-size:1.1rem;">0</td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2" style="color:var(--rojo);font-size:0.7rem;padding-left:4px;">← Resto final
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="rule-box verde">
+                    <div class="titulo">✅ Resultado</div>
+                    <div style="font-size:1.2rem;font-weight:700;color:var(--verde);">22 ÷ 8 = 2,75</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 11 – MULTIPLICACIÓN: 23 × 14 (TRADICIONAL) ═══ -->
+        <div class="slide" id="s11">
+            <div class="s-header">
+                <span class="badge">✖️ MULTIPLICACIÓN</span>
+                <h2>Multiplicación tradicional: 23 × 14</h2>
+                <span class="s-num">11 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Multiplicamos <strong style="color:var(--azul);">23</strong> × <strong
+                        style="color:var(--naranja);">14</strong> usando el <strong>método tradicional</strong>.
+                </div>
+                <div class="division-tabla">
+                    <table>
+                        <tr>
+                            <td style="font-weight:700;font-size:1.1rem;padding-right:12px;">23</td>
+                            <td style="font-weight:700;font-size:1.1rem;">×</td>
+                            <td style="font-weight:700;font-size:1.1rem;color:var(--naranja);">14</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="border-top:2px solid var(--borde);padding-top:6px;">
+                                <span style="color:var(--morado);font-weight:700;font-size:0.9rem;">Paso 1:</span>
+                                <span style="font-weight:700;font-size:1rem;">23 × 4 =</span>
+                                <span style="font-weight:700;font-size:1.1rem;color:var(--morado);">92</span>
+                                <span style="color:var(--gris);font-size:0.75rem;margin-left:8px;">← unidades</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <span style="color:var(--azul);font-weight:700;font-size:0.9rem;">Paso 2:</span>
+                                <span style="font-weight:700;font-size:1rem;">23 × 10 =</span>
+                                <span style="font-weight:700;font-size:1.1rem;color:var(--azul);">230</span>
+                                <span style="color:var(--gris);font-size:0.75rem;margin-left:8px;">← decenas</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="border-top:2px solid var(--borde);padding-top:6px;">
+                                <span style="font-weight:700;font-size:1rem;">Sumamos:</span>
+                                <span style="font-weight:700;font-size:1.2rem;color:var(--verde);">92 + 230 = 322</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="rule-box verde">
+                    <div class="titulo">✅ Resultado</div>
+                    <div style="font-size:1.2rem;font-weight:700;color:var(--verde);">23 × 14 = 322</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 12 – MULTIPLICACIÓN: 125 × 36 (TRADICIONAL) ═══ -->
+        <div class="slide" id="s12">
+            <div class="s-header">
+                <span class="badge">✖️ MULTIPLICACIÓN</span>
+                <h2>Multiplicación tradicional: 125 × 36</h2>
+                <span class="s-num">12 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Multiplicamos <strong style="color:var(--azul);">125</strong> × <strong
+                        style="color:var(--naranja);">36</strong>.
+                </div>
+                <div class="division-tabla">
+                    <table>
+                        <tr>
+                            <td style="font-weight:700;font-size:1.1rem;padding-right:12px;">125</td>
+                            <td style="font-weight:700;font-size:1.1rem;">×</td>
+                            <td style="font-weight:700;font-size:1.1rem;color:var(--naranja);">36</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="border-top:2px solid var(--borde);padding-top:6px;">
+                                <span style="color:var(--morado);font-weight:700;font-size:0.9rem;">Paso 1:</span>
+                                <span style="font-weight:700;font-size:1rem;">125 × 6 =</span>
+                                <span style="font-weight:700;font-size:1.1rem;color:var(--morado);">750</span>
+                                <span style="color:var(--gris);font-size:0.75rem;margin-left:8px;">← unidades</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <span style="color:var(--azul);font-weight:700;font-size:0.9rem;">Paso 2:</span>
+                                <span style="font-weight:700;font-size:1rem;">125 × 30 =</span>
+                                <span style="font-weight:700;font-size:1.1rem;color:var(--azul);">3.750</span>
+                                <span style="color:var(--gris);font-size:0.75rem;margin-left:8px;">← decenas</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="border-top:2px solid var(--borde);padding-top:6px;">
+                                <span style="font-weight:700;font-size:1rem;">Sumamos:</span>
+                                <span style="font-weight:700;font-size:1.2rem;color:var(--verde);">750 + 3.750 =
+                                    4.500</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="rule-box verde">
+                    <div class="titulo">✅ Resultado</div>
+                    <div style="font-size:1.2rem;font-weight:700;color:var(--verde);">125 × 36 = 4.500</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 13 – MÉTODO HINDÚ: 23 × 14 (CORREGIDO) ═══ -->
+        <div class="slide" id="s13">
+            <div class="s-header">
+                <span class="badge">✖️ MÉTODO HINDÚ</span>
+                <h2>Método hindú: 23 × 14</h2>
+                <span class="s-num">13 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    El <strong>método hindú</strong> usa una cuadrícula. <strong>Multiplicamos</strong> y luego
+                    <strong>sumamos en diagonal</strong> (de derecha a izquierda).
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start;">
+                    <div class="hindú-grid">
+                        <!-- Encabezados -->
+                        <div class="fila-grid">
+                            <div class="celda celda-header"
+                                style="width:30px;height:30px;border:none;background:transparent;"></div>
+                            <div class="celda celda-header" style="width:56px;height:30px;font-size:1rem;">2</div>
+                            <div class="celda celda-header" style="width:56px;height:30px;font-size:1rem;">3</div>
+                        </div>
+                        <div class="fila-grid">
+                            <div class="celda celda-header" style="width:30px;height:56px;font-size:1rem;">1</div>
+                            <div class="celda celda-mitad inf-azul" style="width:56px;height:56px;">
+                                <span class="num-sup">0</span><span class="num-inf">2</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-azul inf-verde" style="width:56px;height:56px;">
+                                <span class="num-sup">0</span><span class="num-inf">3</span>
+                                <div class="diagonal"></div>
+                            </div>
+                        </div>
+                        <div class="fila-grid">
+                            <div class="celda celda-header" style="width:30px;height:56px;font-size:1rem;">4</div>
+                            <div class="celda celda-mitad sup-azul inf-verde" style="width:56px;height:56px;">
+                                <span class="num-sup">0</span><span class="num-inf">8</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-verde inf-rosa" style="width:56px;height:56px;">
+                                <span class="num-sup">1</span><span class="num-inf">2</span>
+                                <div class="diagonal"></div>
+                            </div>
+                        </div>
+                        <!-- Suma en diagonal (con colores) -->
+                        <div style="margin-top:12px;border-top:2px solid var(--borde);padding-top:10px;">
+                            <div style="display:flex;flex-direction:column;gap:4px;font-size:0.9rem;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#f8d7da;border-radius:4px;"></span>
+                                    <span><strong>Unidades:</strong> 2 → <span style="font-weight:700;">2</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#d4edda;border-radius:4px;"></span>
+                                    <span><strong>Decenas:</strong> 3 + 8 + 1 = 12 → anotamos <span
+                                            style="font-weight:700;">2</span>, <span style="color:var(--rojo);">llevamos
+                                            1</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#cce5ff;border-radius:4px;"></span>
+                                    <span><strong>Centenas:</strong> 2 + 0 + 0 = 2 → +1 que llevamos = <span
+                                            style="font-weight:700;">3</span></span>
+                                </div>
+                            </div>
+                            <div
+                                style="font-size:1.2rem;font-weight:700;color:var(--verde);margin-top:8px;text-align:center;">
+                                Resultado: <span style="font-size:1.4rem;">322</span> (3 | 2 | 2)
+                            </div>
+                        </div>
+                        <div style="text-align:center;font-size:0.7rem;color:var(--gris);margin-top:4px;">
+                            ← Suma de derecha a izquierda
+                        </div>
+                    </div>
+                    <!-- Explicación lateral -->
+                    <div style="max-width:280px;">
+                        <div class="rule-box naranja">
+                            <div class="titulo">📊 ¿Cómo funciona?</div>
+                            <ul style="font-size:0.85rem;">
+                                <li>Multiplica cada dígito (fila × columna)</li>
+                                <li>Escribe <span style="color:var(--morado);font-weight:700;">decenas arriba</span> y
+                                    <span style="color:var(--azul);font-weight:700;">unidades abajo</span></li>
+                                <li><strong>Suma en diagonal</strong> de derecha a izquierda</li>
+                                <li>Si una diagonal da ≥ 10, <strong>lleva</strong> a la siguiente</li>
+                            </ul>
+                        </div>
+                        <div class="rule-box verde">
+                            <div class="titulo">✅ Resultado</div>
+                            <div style="font-size:1.1rem;font-weight:700;color:var(--verde);">23 × 14 = 322</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 14 – MÉTODO HINDÚ: 125 × 36 (CORREGIDO) ═══ -->
+        <div class="slide" id="s14">
+            <div class="s-header">
+                <span class="badge">✖️ MÉTODO HINDÚ</span>
+                <h2>Método hindú: 125 × 36</h2>
+                <span class="s-num">14 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    <strong style="color:var(--azul);">125</strong> × <strong style="color:var(--naranja);">36</strong>.
+                    Multiplicamos y sumamos en diagonal.
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start;">
+                    <div class="hindú-grid">
+                        <div class="fila-grid">
+                            <div class="celda celda-header"
+                                style="width:30px;height:28px;border:none;background:transparent;"></div>
+                            <div class="celda celda-header" style="width:50px;height:28px;font-size:0.9rem;">1</div>
+                            <div class="celda celda-header" style="width:50px;height:28px;font-size:0.9rem;">2</div>
+                            <div class="celda celda-header" style="width:50px;height:28px;font-size:0.9rem;">5</div>
+                        </div>
+                        <div class="fila-grid">
+                            <div class="celda celda-header" style="width:30px;height:56px;font-size:0.9rem;">3</div>
+                            <div class="celda celda-mitad sup-morado inf-amarillo" style="width:50px;height:56px;"><span
+                                    class="num-sup">0</span><span class="num-inf">3</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-amarillo inf-azul" style="width:50px;height:56px;"><span
+                                    class="num-sup">0</span><span class="num-inf">6</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-azul inf-verde" style="width:50px;height:56px;"><span
+                                    class="num-sup">1</span><span class="num-inf">5</span>
+                                <div class="diagonal"></div>
+                            </div>
+                        </div>
+                        <div class="fila-grid">
+                            <div class="celda celda-header" style="width:30px;height:56px;font-size:0.9rem;">6</div>
+                            <div class="celda celda-mitad sup-amarillo inf-azul" style="width:50px;height:56px;"><span
+                                    class="num-sup">0</span><span class="num-inf">6</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-azul inf-verde" style="width:50px;height:56px;"><span
+                                    class="num-sup">1</span><span class="num-inf">2</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-verde inf-rosa" style="width:50px;height:56px;"><span
+                                    class="num-sup">3</span><span class="num-inf">0</span>
+                                <div class="diagonal"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px;border-top:2px solid var(--borde);padding-top:10px;">
+                            <div style="display:flex;flex-direction:column;gap:4px;font-size:0.85rem;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#f8d7da;border-radius:4px;"></span>
+                                    <span><strong>Unidades:</strong> 0 → <span style="font-weight:700;">0</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#d4edda;border-radius:4px;"></span>
+                                    <span><strong>Decenas:</strong> 3 + 2 + 5 = 10 → anotamos <span
+                                            style="font-weight:700;">0</span>, <span style="color:var(--rojo);">llevamos
+                                            1</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#cce5ff;border-radius:4px;"></span>
+                                    <span><strong>Centenas:</strong> 1 + 1 + 6 + 6 = 14, +1 que llevamos = <span
+                                            style="font-weight:700;">15</span> → anotamos <span
+                                            style="font-weight:700;">5</span>, <span style="color:var(--rojo);">llevamos
+                                            1</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#fff3cd;border-radius:4px;"></span>
+                                    <span><strong>Millares:</strong> 3 + 0 + 0 = 3, +1 que llevamos = <span
+                                            style="font-weight:700;">4</span></span>
+                                </div>
+                            </div>
+                            <div
+                                style="font-size:1.1rem;font-weight:700;color:var(--verde);margin-top:8px;text-align:center;">
+                                Resultado: <span style="font-size:1.3rem;">4.500</span> (4 | 5 | 0 | 0)
+                            </div>
+                        </div>
+                    </div>
+                    <div style="max-width:280px;">
+                        <div class="rule-box verde">
+                            <div class="titulo">✅ Resultado</div>
+                            <div style="font-size:1.1rem;font-weight:700;color:var(--verde);">125 × 36 = 4.500</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 15 – MÉTODO HINDÚ: 34 × 27 (CORREGIDO) ═══ -->
+        <div class="slide" id="s15">
+            <div class="s-header">
+                <span class="badge">✖️ MÉTODO HINDÚ</span>
+                <h2>Método hindú: 34 × 27</h2>
+                <span class="s-num">15 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    <strong style="color:var(--azul);">34</strong> × <strong style="color:var(--naranja);">27</strong>.
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start;">
+                    <div class="hindú-grid">
+                        <div class="fila-grid">
+                            <div class="celda celda-header"
+                                style="width:30px;height:28px;border:none;background:transparent;"></div>
+                            <div class="celda celda-header" style="width:50px;height:28px;font-size:0.9rem;">3</div>
+                            <div class="celda celda-header" style="width:50px;height:28px;font-size:0.9rem;">4</div>
+                        </div>
+                        <div class="fila-grid">
+                            <div class="celda celda-header" style="width:30px;height:56px;font-size:0.9rem;">2</div>
+                            <div class="celda celda-mitad sup-amarillo inf-azul" style="width:50px;height:56px;"><span
+                                    class="num-sup">0</span><span class="num-inf">6</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-azul inf-verde" style="width:50px;height:56px;"><span
+                                    class="num-sup">0</span><span class="num-inf">8</span>
+                                <div class="diagonal"></div>
+                            </div>
+                        </div>
+                        <div class="fila-grid">
+                            <div class="celda celda-header" style="width:30px;height:56px;font-size:0.9rem;">7</div>
+                            <div class="celda celda-mitad sup-azul inf-verde" style="width:50px;height:56px;"><span
+                                    class="num-sup">2</span><span class="num-inf">1</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-verde inf-rosa" style="width:50px;height:56px;"><span
+                                    class="num-sup">2</span><span class="num-inf">8</span>
+                                <div class="diagonal"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px;border-top:2px solid var(--borde);padding-top:10px;">
+                            <div style="display:flex;flex-direction:column;gap:4px;font-size:0.85rem;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#f8d7da;border-radius:4px;"></span>
+                                    <span><strong>Unidades:</strong> 8 → <span style="font-weight:700;">8</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#d4edda;border-radius:4px;"></span>
+                                    <span><strong>Decenas:</strong> 2 + 1 + 8 = 11 → anotamos <span
+                                            style="font-weight:700;">1</span>, <span style="color:var(--rojo);">llevamos
+                                            1</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#cce5ff;border-radius:4px;"></span>
+                                    <span><strong>Centenas:</strong> 2 + 0 + 6 = 8, +1 que llevamos = <span
+                                            style="font-weight:700;">9</span></span>
+                                </div>
+                            </div>
+                            <div
+                                style="font-size:1.1rem;font-weight:700;color:var(--verde);margin-top:8px;text-align:center;">
+                                Resultado: <span style="font-size:1.3rem;">918</span> (9 | 1 | 8)
+                            </div>
+                        </div>
+                    </div>
+                    <div style="max-width:280px;">
+                        <div class="rule-box verde">
+                            <div class="titulo">✅ Resultado</div>
+                            <div style="font-size:1.1rem;font-weight:700;color:var(--verde);">34 × 27 = 918</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 16 – MÉTODO HINDÚ: 56 × 43 (CORREGIDO) ═══ -->
+        <div class="slide" id="s16">
+            <div class="s-header">
+                <span class="badge">✖️ MÉTODO HINDÚ</span>
+                <h2>Método hindú: 56 × 43</h2>
+                <span class="s-num">16 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    <strong style="color:var(--azul);">56</strong> × <strong style="color:var(--naranja);">43</strong>.
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start;">
+                    <div class="hindú-grid">
+                        <div class="fila-grid">
+                            <div class="celda celda-header"
+                                style="width:30px;height:28px;border:none;background:transparent;"></div>
+                            <div class="celda celda-header" style="width:50px;height:28px;font-size:0.9rem;">5</div>
+                            <div class="celda celda-header" style="width:50px;height:28px;font-size:0.9rem;">6</div>
+                        </div>
+                        <div class="fila-grid">
+                            <div class="celda celda-header" style="width:30px;height:56px;font-size:0.9rem;">4</div>
+                            <div class="celda celda-mitad sup-amarillo inf-azul" style="width:50px;height:56px;"><span
+                                    class="num-sup">2</span><span class="num-inf">0</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-azul inf-verde" style="width:50px;height:56px;"><span
+                                    class="num-sup">2</span><span class="num-inf">4</span>
+                                <div class="diagonal"></div>
+                            </div>
+                        </div>
+                        <div class="fila-grid">
+                            <div class="celda celda-header" style="width:30px;height:56px;font-size:0.9rem;">3</div>
+                            <div class="celda celda-mitad sup-azul inf-verde" style="width:50px;height:56px;"><span
+                                    class="num-sup">1</span><span class="num-inf">5</span>
+                                <div class="diagonal"></div>
+                            </div>
+                            <div class="celda celda-mitad sup-verde inf-rosa" style="width:50px;height:56px;"><span
+                                    class="num-sup">1</span><span class="num-inf">8</span>
+                                <div class="diagonal"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px;border-top:2px solid var(--borde);padding-top:10px;">
+                            <div style="display:flex;flex-direction:column;gap:4px;font-size:0.85rem;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#f8d7da;border-radius:4px;"></span>
+                                    <span><strong>Unidades:</strong> 8 → <span style="font-weight:700;">8</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#d4edda;border-radius:4px;"></span>
+                                    <span><strong>Decenas:</strong> 1 + 4 + 5 = 10 → anotamos <span
+                                            style="font-weight:700;">0</span>, <span style="color:var(--rojo);">llevamos
+                                            1</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#cce5ff;border-radius:4px;"></span>
+                                    <span><strong>Centenas:</strong> 2 + 1 + 0 = 3, +1 que llevamos = <span
+                                            style="font-weight:700;">4</span></span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span
+                                        style="display:inline-block;width:16px;height:16px;background:#fff3cd;border-radius:4px;"></span>
+                                    <span><strong>Millares:</strong> 2 → <span style="font-weight:700;">2</span></span>
+                                </div>
+                            </div>
+                            <div
+                                style="font-size:1.1rem;font-weight:700;color:var(--verde);margin-top:8px;text-align:center;">
+                                Resultado: <span style="font-size:1.3rem;">2.408</span> (2 | 4 | 0 | 8)
+                            </div>
+                        </div>
+                    </div>
+                    <div style="max-width:280px;">
+                        <div class="rule-box verde">
+                            <div class="titulo">✅ Resultado</div>
+                            <div style="font-size:1.1rem;font-weight:700;color:var(--verde);">56 × 43 = 2.408</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 17 – RELACIÓN INVERSA ═══ -->
+        <div class="slide" id="s17">
+            <div class="s-header">
+                <span class="badge">🔄 RELACIÓN</span>
+                <h2>Multiplicación y División son inversas</h2>
+                <span class="s-num">17 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="intro-text">
+                    Si sabes multiplicar, <strong>ya sabes dividir</strong>. Son operaciones que se
+                    <strong>deshacen</strong> entre sí.
+                </div>
+                <div class="dos-col">
+                    <div class="rule-box naranja">
+                        <div class="titulo">🔁 Familia de operaciones</div>
+                        <div style="font-size:1.1rem;line-height:2.2;text-align:center;">
+                            <span style="color:var(--azul);font-weight:700;">8</span>
+                            <span style="font-size:1.4rem;"> × </span>
+                            <span style="color:var(--azul);font-weight:700;">5</span>
+                            <span style="font-size:1.4rem;"> = </span>
+                            <span style="color:var(--verde);font-weight:700;">40</span>
+                            <br>
+                            <span style="color:var(--verde);font-weight:700;">40</span>
+                            <span style="font-size:1.4rem;"> ÷ </span>
+                            <span style="color:var(--azul);font-weight:700;">5</span>
+                            <span style="font-size:1.4rem;"> = </span>
+                            <span style="color:var(--azul);font-weight:700;">8</span>
+                            <br>
+                            <span style="color:var(--verde);font-weight:700;">40</span>
+                            <span style="font-size:1.4rem;"> ÷ </span>
+                            <span style="color:var(--azul);font-weight:700;">8</span>
+                            <span style="font-size:1.4rem;"> = </span>
+                            <span style="color:var(--azul);font-weight:700;">5</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rule-box verde">
+                            <div class="titulo">✅ Ejemplo con números grandes</div>
+                            <div style="font-size:1rem;line-height:2;">
+                                <strong>Si 23 × 14 = 322</strong><br>
+                                Entonces <strong>322 ÷ 14 = 23</strong><br>
+                                Y <strong>322 ÷ 23 = 14</strong>
+                            </div>
+                        </div>
+                        <div class="rule-box morado">
+                            <div class="titulo">📌 Truco</div>
+                            <p>Si olvidaste una división, pregúntate:<br>
+                                <em>"¿Qué número multiplicado por el divisor me da el dividendo?"</em>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 18 – RESUMEN DIVISIÓN ═══ -->
+        <div class="slide" id="s18">
+            <div class="s-header">
+                <span class="badge">📝 RESUMEN</span>
+                <h2>Resumen: División</h2>
+                <span class="s-num">18 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="rule-box">
+                    <div class="titulo">📊 Método de la cajita</div>
+                    <div style="font-size:0.9rem;line-height:1.8;">
+                        <div style="display:grid;grid-template-columns:auto 1fr;gap:8px;padding:4px 0;">
+                            <span style="background:var(--amarillo-resalte);padding:0 6px;border-radius:4px;">Paso
+                                1</span>
+                            <span>Preguntar: ¿cuántas veces cabe el divisor en el primer número?</span>
+                            <span style="background:var(--amarillo-resalte);padding:0 6px;border-radius:4px;">Paso
+                                2</span>
+                            <span>Multiplicar y restar</span>
+                            <span style="background:var(--amarillo-resalte);padding:0 6px;border-radius:4px;">Paso
+                                3</span>
+                            <span>Bajar el siguiente dígito (flecha <span class="flecha">↓</span>)</span>
+                            <span style="background:var(--amarillo-resalte);padding:0 6px;border-radius:4px;">Paso
+                                4</span>
+                            <span>Repetir hasta que no haya más dígitos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dos-col">
+                    <div class="rule-box verde">
+                        <div class="titulo">✅ Divisiones exactas</div>
+                        <div style="font-size:0.9rem;line-height:1.8;">
+                            156 ÷ 4 = <strong>39</strong><br>
+                            725 ÷ 5 = <strong>145</strong><br>
+                            648 ÷ 6 = <strong>108</strong>
+                        </div>
+                    </div>
+                    <div class="rule-box naranja">
+                        <div class="titulo">🔢 Divisiones con decimales</div>
+                        <div style="font-size:0.9rem;line-height:1.8;">
+                            15 ÷ 4 = <strong>3,75</strong><br>
+                            22 ÷ 8 = <strong>2,75</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 19 – RESUMEN MULTIPLICACIÓN ═══ -->
+        <div class="slide" id="s19">
+            <div class="s-header">
+                <span class="badge">📝 RESUMEN</span>
+                <h2>Resumen: Multiplicación</h2>
+                <span class="s-num">19 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="dos-col">
+                    <div>
+                        <div class="rule-box">
+                            <div class="titulo">📊 Método tradicional</div>
+                            <div style="font-size:0.9rem;line-height:1.8;">
+                                <strong>23 × 14 = 322</strong><br>
+                                23 × 4 = 92 (unidades)<br>
+                                23 × 10 = 230 (decenas)<br>
+                                92 + 230 = <strong>322</strong>
+                            </div>
+                        </div>
+                        <div class="rule-box verde">
+                            <div class="titulo">✅ Ejemplo tradicional</div>
+                            <div style="font-size:0.9rem;">
+                                125 × 36 = <strong>4.500</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rule-box naranja">
+                            <div class="titulo">📊 Método hindú</div>
+                            <div style="font-size:0.9rem;line-height:1.8;">
+                                <strong>23 × 14 = 322</strong><br>
+                                <strong>125 × 36 = 4.500</strong><br>
+                                <strong>34 × 27 = 918</strong><br>
+                                <strong>56 × 43 = 2.408</strong>
+                            </div>
+                        </div>
+                        <div class="rule-box morado">
+                            <div class="titulo">💡 Ventaja</div>
+                            <p style="font-size:0.85rem;">El método hindú aísla cada multiplicación parcial, reduciendo
+                                errores.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 20 – COMPARACIÓN DE MÉTODOS ═══ -->
+        <div class="slide" id="s20">
+            <div class="s-header">
+                <span class="badge">📊 COMPARACIÓN</span>
+                <h2>Método tradicional vs Método hindú</h2>
+                <span class="s-num">20 / 22</span>
+            </div>
+            <div class="s-body">
+                <div class="dos-col">
+                    <div class="rule-box">
+                        <div class="titulo">📐 Método tradicional</div>
+                        <ul style="font-size:0.88rem;line-height:1.8;">
+                            <li><strong>Rápido</strong> para números pequeños</li>
+                            <li>Requiere <strong>manejo de llevadas</strong></li>
+                            <li>Ideal para <strong>cálculo mental</strong></li>
+                            <li>Se usa en <strong>pruebas estandarizadas</strong></li>
+                        </ul>
+                        <div
+                            style="margin-top:6px;font-size:0.85rem;background:var(--amarillo-resalte);padding:4px 10px;border-radius:6px;">
+                            23 × 14 = 322
+                        </div>
+                    </div>
+                    <div class="rule-box naranja">
+                        <div class="titulo">🧮 Método hindú</div>
+                        <ul style="font-size:0.88rem;line-height:1.8;">
+                            <li><strong>Visual y ordenado</strong></li>
+                            <li><strong>Reduce errores</strong> de llevadas</li>
+                            <li>Ideal para <strong>números grandes</strong></li>
+                            <li>Fácil de <strong>verificar</strong> paso a paso</li>
+                        </ul>
+                        <div
+                            style="margin-top:6px;font-size:0.85rem;background:var(--amarillo-resalte);padding:4px 10px;border-radius:6px;">
+                            23 × 14 = 322 (misma respuesta)
+                        </div>
+                    </div>
+                </div>
+                <div class="rule-box verde">
+                    <div class="titulo">📌 Recomendación</div>
+                    <p style="font-size:0.9rem;">
+                        <strong>Usa el método tradicional</strong> para números pequeños o cuando tengas práctica.<br>
+                        <strong>Usa el método hindú</strong> cuando los números sean grandes o quieras asegurarte de no
+                        equivocarte.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 21 – CIERRE ═══ -->
+        <div class="slide" id="s21">
+            <div class="s-header">
+                <span class="badge">🎯 CIERRE</span>
+                <h2>¡Hoy aprendiste!</h2>
+                <span class="s-num">21 / 22</span>
+            </div>
+            <div class="s-body" style="justify-content:center;align-items:center;text-align:center;gap:16px;">
+                <div style="font-size:3.5rem;">📚</div>
+                <h3 style="font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--azul);">Multiplicación y
+                    División</h3>
+                <div style="max-width:500px;font-size:1rem;line-height:1.8;color:#1e2b3c;">
+                    <ul style="list-style:none;padding:0;">
+                        <li>✅ Partes de la división: dividendo, divisor, cociente, resto</li>
+                        <li>✅ Método de la cajita para dividir</li>
+                        <li>✅ 5 ejemplos de división (3 exactas + 2 con decimales)</li>
+                        <li>✅ Partes de la multiplicación: factores y producto</li>
+                        <li>✅ 2 ejemplos con método tradicional</li>
+                        <li>✅ 3 ejemplos con método hindú</li>
+                        <li>✅ Relación inversa entre multiplicación y división</li>
+                    </ul>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+                    <span class="cover-tag" style="background:var(--naranja);color:white;border:none;">✖️
+                        Multiplicar</span>
+                    <span class="cover-tag" style="background:var(--verde);color:white;border:none;">➗ Dividir</span>
+                    <span class="cover-tag" style="background:var(--morado);color:white;border:none;">🔢
+                        Decimales</span>
+                    <span class="cover-tag" style="background:var(--azul);color:white;border:none;">📊 Método
+                        hindú</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ SLIDE 22 – CIERRE FINAL ═══ -->
+        <div class="slide" id="s22">
+            <div class="s-header">
+                <span class="badge">✅ FIN</span>
+                <h2>¡Excelente trabajo!</h2>
+                <span class="s-num">22 / 22</span>
+            </div>
+            <div class="s-body" style="justify-content:center;align-items:center;text-align:center;gap:16px;">
+                <div style="font-size:4rem;">🏆</div>
+                <p style="font-size:1.2rem;max-width:500px;color:#1e2b3c;line-height:1.6;">
+                    Has aprendido a <strong>multiplicar</strong> y <strong>dividir</strong> con dos métodos
+                    diferentes.<br><br>
+                    Recuerda practicar para que cada vez te salga mejor.
+                </p>
+                <div style="font-size:0.9rem;color:var(--gris);">
+                    Clase 1 · 6° Básico · Preparación PAES 2027
+                </div>
+            </div>
+        </div>
+
+    </div><!-- #app -->
+
+    <!-- ─── NAVEGACIÓN ─── -->
+    <div id="nav">
+        <button class="nav-btn" id="prevBtn" disabled onclick="navigate(-1)">← Anterior</button>
+        <div id="progress-wrap">
+            <div id="progress-bar">
+                <div id="progress-fill" style="width:4.5%"></div>
+            </div>
+            <div id="slide-label">Slide 1 / 22</div>
+        </div>
+        <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Siguiente →</button>
+        <div class="nav-links">
+            <button class="nav-btn gold" onclick="window.location.href='index.html'">📖 Curso</button>
+            <button class="nav-btn verde" onclick="window.location.href='E1.html'">✏️ Ejercicios</button>
+        </div>
+    </div>
+
+    <script>
+        // ════════════════════════════════════════
+        //  NAVEGACIÓN DE SLIDES
+        // ════════════════════════════════════════
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+        let current = 0;
+
+        function navigate(dir) {
+            slides[current].classList.remove('active');
+            current = Math.max(0, Math.min(total - 1, current + dir));
+            slides[current].classList.add('active');
+            document.getElementById('prevBtn').disabled = (current === 0);
+            document.getElementById('nextBtn').disabled = (current === total - 1);
+            document.getElementById('progress-fill').style.width = ((current + 1) / total * 100) + '%';
+            document.getElementById('slide-label').textContent = `Slide ${current + 1} / ${total}`;
+            slides[current].scrollTop = 0;
+        }
+
+        // Teclado
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate(-1);
+        });
+
+        // Touch
+        let touchX = 0;
+        document.getElementById('app').addEventListener('touchstart', e => {
+            touchX = e.touches[0].clientX;
+        }, { passive: true });
+        document.getElementById('app').addEventListener('touchend', e => {
+            const diff = e.changedTouches[0].clientX - touchX;
+            if (Math.abs(diff) > 50) navigate(diff < 0 ? 1 : -1);
+        }, { passive: true });
+    </script>
+
+</body>
+
+</html>
